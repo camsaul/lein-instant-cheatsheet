@@ -40,7 +40,7 @@ You can create an Emacs function to search Instant Clojure Cheatsheet, and even 
 (define-key nrepl-interaction-mode-map (kbd "<f12> i") 'instant-clojure-cheatsheet-search)
 ```
 
-If you have an active region (highlighted text), hitting `F12 i` (or the keyboard shortcut of your choice) will open a new Instant Cheatsheet browser tab with highlighted text as the inital filter text. If you don't have any text highlighted, it will prompt you to enter a search query in the minibuffer.
+If you have an active region (highlighted text), hitting `F12 i` (or the keyboard shortcut of your choice) will open a new Instant Cheatsheet browser tab with the highlighted text as the inital filter text. If you don't have any text highlighted, it will prompt you to enter a search query in the minibuffer.
 
 
 #### Building Upon Instant Clojure Cheatsheet ####
