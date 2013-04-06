@@ -1,0 +1,60 @@
+.tooltip {
+    font-size: 14px;
+    width: 800px;
+}
+.tooltip.in {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    zoom: 1;
+    width: 800px;
+}
+
+.tooltip-inner {
+    background-color: #2e2e2e;
+    line-height: 15px;
+    padding: 12px 12px;
+    text-align: left;
+    width: 600px;
+    max-width: 600px;
+    font-family: Consolas, monaco, monospace;
+    font-size: 13px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+div.namespace {
+    font-size: 12px;
+    margin-bottom: 15px;
+    line-height: 15px;
+}
+
+div#source {
+    font-family: Consolas, monaco, monospace;
+    font-size: 13px;
+}
+
+pre.source {
+    visibility: hidden;
+}
+
+div.namespace a {
+    margin-right: 5px;
+}
+
+div.doc b {
+    color: #2ecc71;
+}
+
+div.doc i {
+    font-size: 12px;
+    color: #cccccc;
+}
+
+div.doc i.right {
+   float: right;
+}
+
+footer {
+    margin-top: 20px;
+}
