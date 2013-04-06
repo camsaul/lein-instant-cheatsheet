@@ -41,7 +41,7 @@
     (make-footer)
     ;; JS is placed at the end so the pages load faster
     (include-js "http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"
-                "js/bootstrap-tooltip.min.js"
+                "js/bootstrap-tooltip.min.js"
                 "js/application.js")]))
 
 (defn build-fn-div
