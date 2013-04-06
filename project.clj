@@ -44,7 +44,7 @@
   :update :alwyas
   :source-paths ["src/clj"]
   :codox {:sources ["src/clj"]
-          :src-dir-uri "http://github.com/cammsaul/mozilla-ignite-demo/blob/master/"
+          :src-dir-uri "http://github.com/cammsaul/instant-clojure-cheetsheet/blob/master/"
           :src-linenum-anchor-prefix "L"}
   :profiles
   {:dev {:dependencies [[ring-mock "LATEST"]]}}
