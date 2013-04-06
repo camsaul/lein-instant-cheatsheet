@@ -20,9 +20,9 @@
             clojure.pprint
             clojure.reflect
             clojure.repl
-            [clojure.set :as set]
+            clojure.set
             clojure.stacktrace
-            [clojure.string :as str]
+            clojure.string
             clojure.template
             clojure.test
             clojure.walk
@@ -33,12 +33,12 @@
             clojure.core.cache
             clojure.core.contracts
             clojure.core.incubator
-            [clojure.core.logic :as logic]
+            clojure.core.logic
             clojure.core.match
             clojure.core.memoize
             clojure.core.typed
             clojure.core.unify
-            [clojure.data.codec.base64 :as b64]
+            clojure.data.codec.base64
             clojure.data.csv
             clojure.data.finger-tree
             clojure.data.generators
@@ -51,7 +51,7 @@
             clojure.java.jdbc
             clojure.java.jmx
             clojure.math.combinatorics
-            [clojure.math.numeric-tower :as math]
+            clojure.math.numeric-tower
             clojure.test.generative
             clojure.tools.cli
             clojure.tools.logging
@@ -60,12 +60,12 @@
             clojure.tools.namespace.find
             clojure.tools.nrepl
             clojure.tools.reader
-            [clojure.tools.trace :as trace]))
+            clojure.tools.trace))
 
 (def main-page
   "Builds the main page for the instant Clojure cheatsheet"
   (memoize (fn []
-             (let [all-docs (mapv layout/html-docs-for-ns (sort (map str (all-ns))))]
+             (let [all-docs (map layout/html-docs-for-ns (sort (map str (all-ns))))]
                (layout/page "Instant Clojure Cheatsheet"
                             [:div
                              [:div.span4

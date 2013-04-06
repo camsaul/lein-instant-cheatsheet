@@ -1,6 +1,6 @@
 function getQuery()
 {
-  var regex = new RegExp("\\?(.*)");
+  var regex = new RegExp("\\?([\\w-?!*]+)$");
   var results = regex.exec(window.location.search);
   if(results == null)
     return "";
@@ -43,9 +43,14 @@ $(document).ready(function() {
       
       fnDivs.each(function() {
 	var aChild = $(this).children('a:first-child');
-	var regex = new RegExp(filterStr);
-	var results = regex.exec(aChild.text());
-	if (results != null) {
+
+	// regular expressions are a little too slow for the filtering. 
+	// Use these lines instead if you'd like to use regexes anyway
+	// var regex = new RegExp(filterStr);
+	// var results = regex.exec(aChild.text());
+	// if (results != null) {
+
+	if (aChild.text().indexOf(filterStr) != -1) {
 	  $(this).show()
 	  sourceBoxHtml += sourceBoxHtmlForChild(aChild);
 	} else {

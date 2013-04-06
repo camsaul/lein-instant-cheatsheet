@@ -10,7 +10,8 @@
 }
 
 .tooltip-inner {
-    background-color: #2e2e2e;
+    background-color: #eeeeee;
+    color: #111111;
     line-height: 15px;
     padding: 12px 12px;
     text-align: left;
@@ -43,12 +44,12 @@ div.namespace a {
 }
 
 div.doc b {
-    color: #2ecc71;
+    color: #FF0051;
 }
 
 div.doc i {
     font-size: 12px;
-    color: #cccccc;
+    color: #aaaaaa;
 }
 
 div.doc i.right {
