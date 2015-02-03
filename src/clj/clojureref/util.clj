@@ -2,6 +2,8 @@
   (:require clojure.repl
             [clojure.string :as str]))
 
+(declare replace-nl-with-br)
+
 (defn str-nl
   "Helper version of \"str\" that adds a newline at the end."
   [& args]
@@ -35,19 +37,32 @@
    (:forms m) (apply str (interpose " " (:forms m)))
    (:arglists m) (apply str (interpose " " (:arglists m)))))
 
-(defn get-source
+(defn -source-for-symbol
   "Gets source from function/macro/special form var."
-  [nmsp symb]
-  (clojure.repl/source-fn (symbol (str nmsp) (str symb))))
+  [symb]
+  (clojure.repl/source-fn symb))
 
-(defn doc-for-ns
-  "Returns a seq of [symbol-name doc forms source] for each public function/macro/special form in the namespace."
-  [n]
-  (sort-by first (filter not-empty (map (fn [[symb varr]]
-                                          (let [metta (meta varr)]
-                                            (when-let [forms (get-forms metta)]
-                                              [(name symb) (get-doc metta) forms (get-source n symb)])))
-                                        (ns-publics (symbol n))))))
+(def source-for-symbol
+  (memoize -source-for-symbol))
+
+(defn doctext-split-args-and-description
+  "Given DOC text split the first part that specifies arg formats; return pair of [args-formats description]"
+  [doctext]
+  (let [[_ args-form description] (re-find #"^(\([^\)]+\))\s*(.*)" doctext)]
+    {:args args-form
+     :doc description}))
+
+(defn doc-for-symbol
+  [qualified-symbol]
+  (->> qualified-symbol
+       find-var
+       meta
+       ((fn [metta]
+           (def -m metta)
+           metta))
+       get-doc
+       (#(str/replace % #"\s+" " ")) ;; replace multiple spaces or newlines with single space
+       doctext-split-args-and-description))
 
 (defn replace-nl-with-br
   "Helper method to replace newlines with <br />."

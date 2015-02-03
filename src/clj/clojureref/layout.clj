@@ -13,9 +13,8 @@
       [:div.container
        [:div.nav-collapse.collapse
         [:ul.nav
-         [:li [:a title]]]]]]]]
-   [:input#filter.span10 {:type "text" :placeholder "filter"}]]
-)
+         [:li [:a title]]]]]]]]])
+
 (defn make-footer
   "Helper method to build the page's footer."
   []
@@ -23,26 +22,6 @@
    [:div.container
     [:div.row
      [:h4 [:a {:href "http://www.camsaul.com"} "2013 Cam Saul"]]]]])
-
-(defn page
-  "Takes a page title and hiccup HMTL elements and wraps it with common stylesheet references etc."
-  [title body]
-  (html5
-   [:head
-    [:meta {:charset "utf-8"}]
-    [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
-    [:title title]
-    (include-css "css/bootstrap.min.css"
-                 "css/application.css")]
-   [:body
-    [:div.container
-     (make-header title)
-     body]
-    (make-footer)
-    ;; JS is placed at the end so the pages load faster
-    (include-js "http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"
-                "js/bootstrap-tooltip.min.js"
-                "js/application.js")]))
 
 (defn build-fn-div
   "Helper method to build the entries and popovers for various symbols tags."
@@ -59,13 +38,3 @@
         }
     symb]
    forms])
-
-(def html-docs-for-ns
-  "Formats docstrings for a namespace as html."
-  (memoize
-   (fn [nmsp]
-     (let [docs (util/doc-for-ns nmsp)]
-       [:div.row
-        [:div.namespace
-         [:h4 nmsp]
-         (map (partial build-fn-div nmsp) docs)]]))))

@@ -8,11 +8,15 @@
      {:status 200
       :headers {"Content-Type" "application/json"}
       :body (clojure.data.json/write-str
-             (do ~@body))}))
+             (do (println ~(str name))
+                 (time ~@body)))}))
 
 (def-api-fn get-matches [q]
-  {:q q
-   :results (sources/matching-symbols q)})
+  (sources/matching-symbols q))
+
+(def-api-fn get-source [ns symb]
+  (sources/get-source ns symb))
 
 (defroutes routes
-  (GET "/matches" [q] (get-matches q)))
+  (GET "/matches" [q] (get-matches q))
+  (GET "/source" [ns symbol] (get-source ns symbol)))

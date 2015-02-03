@@ -1,4 +1,6 @@
-(ns clojureref.sources)
+(ns clojureref.sources
+  (:require [clojure.string :as str]
+            [clojureref.util :as util]))
 
 (def namespaces
   (->> '(clojure.core
@@ -59,28 +61,44 @@
          clojure.tools.trace)
        (mapv (fn [ns-symb]
                (require ns-symb)
-               (find-ns ns-symb)))
-       (drop 1)
-       (take 2)))
+               (find-ns ns-symb)))))
 
-(defn symbols-map-for-ns [ns]
+(defn dox-for-symbol
+  "Return dictionary of docstr, args, etc. for SYMB."
+  [ns-name-str symb-name]
+  (let [qualified-symbol (symbol ns-name-str symb-name)]
+    (util/doc-for-symbol qualified-symbol)))
+
+(defn get-source
+  [ns-name-str symb-name]
+  (let [qualified-symbol (symbol ns-name-str symb-name)]
+    {:source (util/source-for-symbol qualified-symbol)}))
+
+(defn symbol-info [ns-info ns-name-str symb-name]
+  (merge ns-info
+         (dox-for-symbol ns-name-str symb-name)))
+
+;; (def symbol-info (memoize -symbol-info))
+
+(defn symbols-for-ns
+  "Return seq of symbols + info like [symb-name {info}] for NS."
+  [ns]
   (let [ns-name-str (-> ns ns-name str)
         ns-info {:namespace ns-name-str}]
     (->> ns
          ns-publics                     ; map of symbol -> var
          keys
-         ;; (filter symbol?)
-         (map str)
          (map (fn [symb]
-                [symb ns-info])))))
+                (let [symb-name (str symb)]
+                  [symb-name (symbol-info ns-info ns-name-str symb-name)]))))))
 
 (def all-symbols
-  "Dictionary of symbol-string -> [info-dict+]"
+  "Create a dict of {symb-name -> [{info}+]}"
   (->> namespaces
-       (mapcat symbols-map-for-ns)
+       (mapcat symbols-for-ns)
        (group-by first)
        (map (fn [[k valls]]
-              {k (mapv second valls)}))
+              {k (map second valls)}))
        (reduce merge)))
 
 (def all-symbols-keys
@@ -91,9 +109,11 @@
        vec))
 
 (defn matching-symbols
-  "Return vector of [[symbol-name [infodict+]]+] of symbols that match Q."
+  "Return vector of [{:name symbol-name :matches [infodict+]}+] of symbols that match Q."
   [q]
-  (->> (filter (partial re-find (re-pattern q))
+  (->> (filter (fn [symbol-str] (.contains symbol-str q))
                all-symbols-keys)
-       (mapcat (fn [match]
-                 [match (all-symbols match)]))))
+       (take 50) ; reasonable limit <3
+       (map (fn [match]
+              {:name match
+               :matches (all-symbols match)}))))
