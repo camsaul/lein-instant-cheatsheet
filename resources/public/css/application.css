@@ -25,6 +25,7 @@
 }
 
 div.namespace {
+    display: block;
     font-size: 12px;
     margin-bottom: 15px;
     line-height: 15px;
@@ -52,8 +53,21 @@ div.doc i {
     color: #aaaaaa;
 }
 
-div.doc i.right {
-   float: right;
+div.doc i.args {
+    color: #08c;
+}
+
+div.doc div.description {
+    padding-top: 5px;
+}
+
+div.doc i.url {
+    display: block;
+    padding-top: 10px;
+}
+
+.right {
+    float: right;
 }
 
 footer {

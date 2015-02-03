@@ -1,34 +1,46 @@
 (ns clojureref.index
-  (:require [clojureref.layout :as layout])
+  "The Hiccup templates that define index.html"
   (:use [hiccup.page :only (html5 include-css include-js)]
         [hiccup.core :only (html)]))
 
-(declare main-head
-         main-body
+(declare head
+         body
+         header
+         footer
          left-column
          right-column
+         right-column-symbol-div
          css-includes
          js-includes)
 
-(defn -main-page []
-  (html5 {:class "no-js"
-          :ng-app "cheatsheet"}
-         (main-head)
-         (main-body)))
+(def page-name
+  "Name that should be used in title / header of the page."
+  "Instant Clojure Cheatsheet")
 
-(def main-page (memoize -main-page))
+(def main-page
+  "Top-level template for index.html"
+  (memoize
+   (fn []
+     (html5 {:class "no-js"
+             :ng-app "cheatsheet"}
+            (head)
+            (body)))))
 
-(defn main-head []
+(defn head
+  "Template for HTML <head> and contents."
+  []
   [:head
    [:meta {:charset "utf-8"}]
    [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
-   [:title "Instant Clojure Cheatsheet"]
+   [:title page-name]
    (apply include-css css-includes)])
 
-(defn main-body []
+(defn body
+  "Template for HTML <body> and contents."
+  []
   [:body
    [:div.container {:ng-controller "MainController"}
-    (layout/make-header "Instant Clojure Cheatsheet")
+    (header page-name)
     [:input#filter.span10 {:type "text"
                            :placeholder "filter"
                            :ng-model "textInput"
@@ -36,40 +48,40 @@
     [:div.row
      (left-column)
      (right-column)]]
-   (layout/make-footer)
-   ;; JS is placed at the end so the pages load faster
+   (footer)
+   ;; JS is placed at the end so the pages load oatfaster
    (apply include-js js-includes)])
 
-(defn symbol-doc-div []
-  [:div.doc
-   [:i.right "{{subresult.namespace}}"]
-   [:b "{{result.name}} "]
-   [:i {:style "color: #08c;"}
-    "{{subresult.args}}"]
-   [:br]
-   [:i {:ng-if "subresult.special_type"}
-    "{{subresult.special_type}} "]
-   "{{subresult.doc}}"
-   [:i {:ng-if "subresult.url"}
-    "<br /><br />See "
-    [:a {:href "{{subresult.url}}"}
-     "{{subresult.url}}"]]])
-
-(defn left-column []
+(defn left-column
+  "Template for the HTML that lays out the left column."
+  []
   [:div#left.span4
-   [:div.namespace {:style "display: block;"
-                    :ng-repeat "result in results"}
+   [:div.namespace {:ng-repeat "result in results"}
     [:a {:href "#?q={{result.name}}"
          :tooltip-placement "right"
          :tooltip-html-unsafe (html [:div "{{leftTooltip(result)}}"])}
      "{{result.name}}"]]])
 
-(defn right-column []
+(defmacro ng-repeat [varname coll & body]
+  `[:div {:ng-repeat ~(str varname " in " coll)}
+    ~@body])
+
+(defmacro ng-if [condition elem]
+  (let [[type & elem] elem
+        [attrs & body] (if (map? (first elem)) elem
+                           (concat [nil] elem))
+        attrs (-> (or attrs {})
+                  (assoc :ng-if (str condition)))]
+    `[~type ~attrs ~@body]))
+
+(defn right-column
+  "Template for HTML that lays out the right-column."
+  []
   [:div#source.span6
    [:div {:ng-repeat "result in results"}
     [:div {:ng-repeat "subresult in result.matches"}
-     (symbol-doc-div)
-     [:span {:style "float: right;"}
+     (right-column-symbol-div)
+     [:span.right
       [:a.fn-source {:href "http://clojuredocs.org/{{subresult.namespace}}/{{result.name}}#examples"}
        "examples"]
       " "
@@ -79,6 +91,43 @@
                      :tooltip-placement "left"}
        "source"]]
      [:hr]]]])
+
+(defn right-column-symbol-div
+  "The div template that is used to display symbol entries in the right column."
+  []
+  [:div.doc
+   [:i.right "{{subresult.namespace}}"]
+   [:b "{{result.name}} "]
+   [:i.args
+    "{{subresult.args}}"]
+   [:div.description
+    [:i {:ng-if "subresult.special_type"}
+     "{{subresult.special_type}} "]
+    "{{subresult.doc}}"]
+   [:i.url {:ng-if "subresult.url"}
+    "See "
+    [:a {:href "{{subresult.url}}"}
+     "{{subresult.url}}"]]])
+
+(defn header
+  "Helper method to build the page's header."
+  [title]
+  [:div.row
+   [:span.span9
+    [:div.navbar
+     [:div.navbar-inner
+      [:div.container
+       [:div.nav-collapse.collapse
+        [:ul.nav
+         [:li [:a title]]]]]]]]])
+
+(defn footer
+  "Helper method to build the page's footer."
+  []
+  [:footer
+   [:div.container
+    [:div.row
+     [:h4 [:a {:href "http://github.com/cammsaul"} "© 2013 - 2015 Cam Saul"]]]]])
 
 (def css-includes ["css/bootstrap.min.css"
                    "css/application.css"])

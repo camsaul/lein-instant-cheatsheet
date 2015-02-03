@@ -1,9 +1,11 @@
 (ns clojureref.handler
-  (:use [compojure.core :only (context defroutes GET)])
-  (:require [clojure.data.json :as json]
-            [compojure.handler :as handler]
+  "Primary Compjure/Ring entry point of the app"
+  (:use [compojure.core :only (context defroutes GET)]
+        [ring.middleware.params :only (wrap-params)]
+        [ring.middleware.gzip :only (wrap-gzip)])
+  (:require ring.middleware.multipart-params
+            [clojure.data.json :as json]
             [compojure.route :as route]
-            [ring.middleware.params :refer [wrap-params]]
             [clojureref.api :as api]
             [clojureref.index :as index]))
 
@@ -15,5 +17,6 @@
   (route/not-found "Not Found"))
 
 (def app
-  (-> (handler/site app-routes)
-      wrap-params))
+  (-> app-routes
+      wrap-params
+      wrap-gzip))
