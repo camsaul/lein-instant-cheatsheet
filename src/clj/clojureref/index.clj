@@ -13,6 +13,33 @@
          css-includes
          js-includes)
 
+
+;;; HELPER FNS + MACROS
+
+(defmacro ng-repeat [varname coll & body]
+  `[:div {:ng-repeat ~(str varname " in " coll)}
+    ~@body])
+
+(defmacro ng-if
+  ([condition elem]
+   (let [[type & elem] elem
+         [attrs & body] (if (map? (first elem)) elem
+                            (concat [nil] elem))
+         attrs (-> (or attrs {})
+                   (assoc :ng-if (str condition)))]
+     `[~type ~attrs ~@body]))
+  ([[condition element]]
+   `(ng-if ~condition ~element)))
+
+(defn binder
+  "Used by the #bind reader macro:
+   `#bind result.name ->> '{{result.name}}'"
+  [symb]
+  (str "{{" (name symb) "}}"))
+
+
+;;; INDEX.HTML TEMPLATES
+
 (def page-name
   "Name that should be used in title / header of the page."
   "Instant Clojure Cheatsheet")
@@ -56,58 +83,47 @@
   "Template for the HTML that lays out the left column."
   []
   [:div#left.span4
-   [:div.namespace {:ng-repeat "result in results"}
-    [:a {:href "#?q={{result.name}}"
-         :tooltip-placement "right"
-         :tooltip-html-unsafe (html [:div "{{leftTooltip(result)}}"])}
-     "{{result.name}}"]]])
-
-(defmacro ng-repeat [varname coll & body]
-  `[:div {:ng-repeat ~(str varname " in " coll)}
-    ~@body])
-
-(defmacro ng-if [condition elem]
-  (let [[type & elem] elem
-        [attrs & body] (if (map? (first elem)) elem
-                           (concat [nil] elem))
-        attrs (-> (or attrs {})
-                  (assoc :ng-if (str condition)))]
-    `[~type ~attrs ~@body]))
+   (ng-repeat result results
+     [:div.namespace
+      [:a {:href (str "#?q=" #bind result.name)
+           :tooltip-placement "right"
+           :tooltip-html-unsafe (html [:div #bind "leftTooltip(result)"])}
+       #bind result.name]])])
 
 (defn right-column
   "Template for HTML that lays out the right-column."
   []
   [:div#source.span6
-   [:div {:ng-repeat "result in results"}
-    [:div {:ng-repeat "subresult in result.matches"}
-     (right-column-symbol-div)
-     [:span.right
-      [:a.fn-source {:href "http://clojuredocs.org/{{subresult.namespace}}/{{result.name}}#examples"}
-       "examples"]
-      " "
-      [:a.fn-source {:href "#"
-                     :ng-mouseover "subresult.src || fetchSource(result, subresult)"
-                     :tooltip-html-unsafe (html [:pre "{{subresult.src || ''}}"])
-                     :tooltip-placement "left"}
-       "source"]]
-     [:hr]]]])
+   (ng-repeat result results
+     (ng-repeat subresult result.matches
+       (right-column-symbol-div)
+       [:span.right
+        [:a.fn-source {:href "http://clojuredocs.org/{{subresult.namespace}}/{{result.name}}#examples"}
+         "examples"]
+        " "
+        [:a.fn-source {:href "#"
+                       :ng-mouseover "subresult.src || fetchSource(result, subresult)"
+                       :tooltip-html-unsafe (html [:pre #bind "subresult.src || ''"])
+                       :tooltip-placement "left"}
+         "source"]]
+       [:hr]))])
 
 (defn right-column-symbol-div
   "The div template that is used to display symbol entries in the right column."
   []
   [:div.doc
-   [:i.right "{{subresult.namespace}}"]
-   [:b "{{result.name}} "]
-   [:i.args
-    "{{subresult.args}}"]
+   [:i.right #bind subresult.namespace]
+   [:b #bind result.name " "]
+   [:i.args #bind subresult.args]
    [:div.description
-    [:i {:ng-if "subresult.special_type"}
-     "{{subresult.special_type}} "]
-    "{{subresult.doc}}"]
-   [:i.url {:ng-if "subresult.url"}
-    "See "
-    [:a {:href "{{subresult.url}}"}
-     "{{subresult.url}}"]]])
+    (ng-if subresult.special_type
+        [:i #bind subresult.special_type " "])
+    #bind subresult.doc]
+   (ng-if subresult.url
+       [:i.url
+        "See "
+        [:a {:href #bind subresult.url}
+         #bind subresult.url]])])
 
 (defn header
   "Helper method to build the page's header."

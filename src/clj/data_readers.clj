@@ -1,0 +1,1 @@
+{bind clojureref.index/binder}
