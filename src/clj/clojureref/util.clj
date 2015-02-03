@@ -1,5 +1,6 @@
 (ns clojureref.util
-  (:require [clojure.string :as str]))
+  (:require clojure.repl
+            [clojure.string :as str]))
 
 (defn str-nl
   "Helper version of \"str\" that adds a newline at the end."
@@ -16,7 +17,7 @@
    (if (:special-form m)
      (str
       "<i>Special Form</i>"
-      (str-nl " " (:doc m)) 
+      (str-nl " " (:doc m))
       (if (contains? m :url)
         (when (:url m)
           (str-nl "\n  Please see http://clojure.org/" (:url m)))
@@ -24,7 +25,7 @@
                 (:name m))))
      (str
       (when (:macro m)
-        "<i>Macro</i>\n") 
+        "<i>Macro</i>\n")
       (str " " (:doc m))))))
 
 (defn get-forms

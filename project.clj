@@ -3,7 +3,7 @@
   :url "http://example.com/FIXME"
   :dependencies [[org.clojure/clojure "LATEST"]
                  [org.clojure/algo.generic "LATEST"]
-                 [org.clojure/algo.monads "LATEST"]                 
+                 [org.clojure/algo.monads "LATEST"]
                  [org.clojure/core.cache "LATEST"]
                  [org.clojure/core.contracts "LATEST"]
                  [org.clojure/core.incubator "LATEST"]
@@ -39,9 +39,10 @@
                  [hiccup "LATEST"]
                  [jayq "LATEST"]]
   :plugins [[lein-ring "LATEST"]
-            [codox "LATEST"]]
+            [codox "LATEST"]
+            [cider/cider-nrepl "LATEST"]]
   :ring {:handler clojureref.handler/app}
-  :update :alwyas
+  :update :always
   :source-paths ["src/clj"]
   :codox {:sources ["src/clj"]
           :src-dir-uri "http://github.com/cammsaul/instant-clojure-cheetsheet/blob/master/"

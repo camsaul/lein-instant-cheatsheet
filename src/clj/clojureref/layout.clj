@@ -51,11 +51,12 @@
    [:a {:data-html "true"
         :data-original-title (html [:div.doc [:i.right nmsp] [:b symb] " " (util/replace-nl-with-br doc)])
         :data-placement "right"
-        :source (when-let [source (util/replace-nl-with-br source)]
-                  (html [:a.fn-source {:data-html "true"
-                                       :data-original-title (html [:pre source])
-                                       :data-placement "right"}
-                         "source"]))}
+        ;; :source (when-let [source (util/replace-nl-with-br source)]
+        ;;           (html [:a.fn-source {:data-html "true"
+        ;;                                :data-original-title (html [:pre source])
+        ;;                                :data-placement "right"}
+        ;;                  "source"]))
+        }
     symb]
    forms])
 
