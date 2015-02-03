@@ -3,39 +3,21 @@
             [clojureref.util :as util]))
 
 (def namespaces
-  (->> '(clojure.core
-         clojure.core.protocols
-         clojure.core.reducers
-         clojure.data
-         clojure.edn
-         clojure.inspector
-         clojure.instant
-         clojure.java.browse
-         clojure.java.io
-         clojure.java.javadoc
-         clojure.java.shell
-         clojure.main
-         clojure.pprint
-         clojure.reflect
-         clojure.repl
-         clojure.set
-         clojure.stacktrace
-         clojure.string
-         clojure.template
-         clojure.test
-         clojure.walk
-         clojure.xml
-         clojure.zip
-         clojure.algo.generic
+  (->> '(clojure.algo.generic
          clojure.algo.monads
+         clojure.core
+         clojure.core.async
          clojure.core.cache
          clojure.core.contracts
          clojure.core.incubator
          clojure.core.logic
          clojure.core.match
          clojure.core.memoize
+         clojure.core.protocols
+         clojure.core.reducers
          clojure.core.typed
          clojure.core.unify
+         clojure.data
          clojure.data.codec.base64
          clojure.data.csv
          clojure.data.finger-tree
@@ -44,12 +26,28 @@
          clojure.data.priority-map
          clojure.data.xml
          clojure.data.zip
+         clojure.edn
+         clojure.inspector
+         clojure.instant
+         clojure.java.browse
          clojure.java.classpath
          clojure.java.data
+         clojure.java.io
+         clojure.java.javadoc
          clojure.java.jdbc
          clojure.java.jmx
+         clojure.java.shell
+         clojure.main
          clojure.math.combinatorics
          clojure.math.numeric-tower
+         clojure.pprint
+         clojure.reflect
+         clojure.repl
+         clojure.set
+         clojure.stacktrace
+         clojure.string
+         clojure.template
+         clojure.test
          clojure.test.generative
          clojure.tools.cli
          clojure.tools.logging
@@ -58,7 +56,55 @@
          clojure.tools.namespace.find
          clojure.tools.nrepl
          clojure.tools.reader
-         clojure.tools.trace)
+         clojure.tools.trace
+         clojure.walk
+         clojure.xml
+         clojure.zip
+         compojure.core
+         compojure.handler
+         compojure.response
+         compojure.route
+         hiccup.compiler
+         hiccup.core
+         hiccup.def
+         hiccup.element
+         hiccup.form
+         hiccup.middleware
+         hiccup.page
+         hiccup.util
+         korma.config
+         korma.core
+         korma.db
+         korma.mysql
+         ring.middleware.content-type
+         ring.middleware.cookies
+         ring.middleware.file
+         ring.middleware.file-info
+         ring.middleware.flash
+         ring.middleware.gzip
+         ring.middleware.head
+         ring.middleware.keyword-params
+         ring.middleware.multipart-params
+         ring.middleware.multipart-params.byte-array
+         ring.middleware.multipart-params.temp-file
+         ring.middleware.nested-params
+         ring.middleware.not-modified
+         ring.middleware.params
+         ring.middleware.resource
+         ring.middleware.session
+         ring.middleware.session.cookie
+         ring.middleware.session.memory
+         ring.middleware.session.store
+         ring.mock.request
+         ring.util.codec
+         ring.util.io
+         ring.util.mime-type
+         ring.util.parsing
+         ring.util.request
+         ring.util.response
+         ring.util.test
+         ring.util.time
+         swiss.arrows)
        (mapv (fn [ns-symb]
                (require ns-symb)
                (find-ns ns-symb)))))

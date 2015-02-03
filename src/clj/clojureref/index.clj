@@ -35,8 +35,7 @@
                            :ng-change "onTextChange()"}]
     [:div.row
      (left-column)
-     (right-column)
-     ]]
+     (right-column)]]
    (layout/make-footer)
    ;; JS is placed at the end so the pages load faster
    (apply include-js js-includes)])
@@ -44,8 +43,17 @@
 (defn symbol-doc-div []
   [:div.doc
    [:i.right "{{subresult.namespace}}"]
-   [:b "{{result.name}}"]
-   " {{subresult.args}}<br />{{subresult.doc}}"])
+   [:b "{{result.name}} "]
+   [:i {:style "color: #08c;"}
+    "{{subresult.args}}"]
+   [:br]
+   [:i {:ng-if "subresult.special_type"}
+    "{{subresult.special_type}} "]
+   "{{subresult.doc}}"
+   [:i {:ng-if "subresult.url"}
+    "<br /><br />See "
+    [:a {:href "{{subresult.url}}"}
+     "{{subresult.url}}"]]])
 
 (defn left-column []
   [:div#left.span4
@@ -61,12 +69,15 @@
    [:div {:ng-repeat "result in results"}
     [:div {:ng-repeat "subresult in result.matches"}
      (symbol-doc-div)
-     [:a.fn-source {:style "float: right;"
-                    :href "#"
-                    :ng-mouseover "fetchSource(result, subresult)"
-                    :tooltip-html-unsafe (html [:pre "{{subresult.src || ''}}"])
-                    :tooltip-placement "left"}
-      "source"]
+     [:span {:style "float: right;"}
+      [:a.fn-source {:href "http://clojuredocs.org/{{subresult.namespace}}/{{result.name}}#examples"}
+       "examples"]
+      " "
+      [:a.fn-source {:href "#"
+                     :ng-mouseover "subresult.src || fetchSource(result, subresult)"
+                     :tooltip-html-unsafe (html [:pre "{{subresult.src || ''}}"])
+                     :tooltip-placement "left"}
+       "source"]]
      [:hr]]]])
 
 (def css-includes ["css/bootstrap.min.css"

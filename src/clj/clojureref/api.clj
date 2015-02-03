@@ -8,8 +8,10 @@
      {:status 200
       :headers {"Content-Type" "application/json"}
       :body (clojure.data.json/write-str
-             (do (println ~(str name))
-                 (time ~@body)))}))
+             (do ~@body)
+             ;; (do (println ~(str name))
+             ;;     (time ~@body))
+             )}))
 
 (def-api-fn get-matches [q]
   (sources/matching-symbols q))

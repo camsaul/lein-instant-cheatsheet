@@ -27,7 +27,7 @@ App.factory('API', ['$resource', function($resource) {
     });
 }]);
 
-App.controller('MainController', ['$scope', '$location', 'API', function($scope, $location, API) {
+App.controller('MainController', ['$scope', '$location', '$sce', 'API', function($scope, $location, $sce, API) {
     $scope.textInput = $location.search().q || "";
     $scope.results = [];
 
@@ -49,7 +49,6 @@ App.controller('MainController', ['$scope', '$location', 'API', function($scope,
     });
 
     $scope.fetchSource = function(result, subresult) {
-        console.log('-------------------- fetchSource(' + result.name + ", " + subresult.namespace + ")");
         if (subresult.src) return;
         API.source({
             ns: subresult.namespace,

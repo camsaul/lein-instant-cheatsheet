@@ -21,7 +21,7 @@
   [:footer
    [:div.container
     [:div.row
-     [:h4 [:a {:href "http://www.camsaul.com"} "2013 Cam Saul"]]]]])
+     [:h4 [:a {:href "http://github.com/cammsaul"} "© 2013 - 2015 Cam Saul"]]]]])
 
 (defn build-fn-div
   "Helper method to build the entries and popovers for various symbols tags."

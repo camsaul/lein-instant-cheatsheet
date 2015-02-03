@@ -4,6 +4,7 @@
   :dependencies [[org.clojure/clojure "LATEST"]
                  [org.clojure/algo.generic "LATEST"]
                  [org.clojure/algo.monads "LATEST"]
+                 [org.clojure/core.async "LATEST"]
                  [org.clojure/core.cache "LATEST"]
                  [org.clojure/core.contracts "LATEST"]
                  [org.clojure/core.incubator "LATEST"]
@@ -37,9 +38,10 @@
                  [amalloy/ring-gzip-middleware "LATEST"]
                  [compojure "LATEST"]
                  [hiccup "LATEST"]
-                 [jayq "LATEST"]]
+                 [swiss-arrows "LATEST"]
+                 [korma "LATEST"]]
   :plugins [[lein-ring "LATEST"]
-            [codox "LATEST"]
+            [codox "LATEST"] ; TODO marginalia instead
             [cider/cider-nrepl "LATEST"]]
   :ring {:handler clojureref.handler/app}
   :update :always
