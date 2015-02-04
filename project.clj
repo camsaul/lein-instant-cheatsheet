@@ -38,11 +38,11 @@
                  [amalloy/ring-gzip-middleware "LATEST"]
                  [compojure "LATEST"]
                  [hiccup "LATEST"]
-                 [swiss-arrows "LATEST"]
-                 [korma "LATEST"]]
+                 [korma "LATEST"]
+                 [medley "LATEST"]
+                 [swiss-arrows "LATEST"]]
   :plugins [[lein-ring "LATEST"]
-            [codox "LATEST"] ; TODO marginalia instead
-            [cider/cider-nrepl "LATEST"]]
+            [cider/cider-nrepl "0.9.0-SNAPSHOT"]]
   :ring {:handler clojureref.handler/app}
   :update :always
   :source-paths ["src/clj"]

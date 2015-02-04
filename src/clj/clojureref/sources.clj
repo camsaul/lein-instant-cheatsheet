@@ -73,6 +73,7 @@
          korma.core
          korma.db
          korma.mysql
+         medley.core
          swiss.arrows)
        (mapv (fn [ns-symb]
                (require ns-symb)
