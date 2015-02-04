@@ -96,34 +96,35 @@
   [:div#source.span6
    (ng-repeat result results
      (ng-repeat subresult result.matches
-       (right-column-symbol-div)
-       [:span.right
-        [:a.fn-source {:href "http://clojuredocs.org/{{subresult.namespace}}/{{result.name}}#examples"}
-         "examples"]
-        " "
-        [:a.fn-source {:href "#"
-                       :ng-mouseover "subresult.src || fetchSource(result, subresult)"
-                       :tooltip-html-unsafe (html [:pre #bind "subresult.src || ''"])
-                       :tooltip-placement "left"}
-         "source"]]
-       [:hr]))])
+       (right-column-symbol-div)))])
 
 (defn right-column-symbol-div
   "The div template that is used to display symbol entries in the right column."
   []
-  [:div.doc
-   [:i.right #bind subresult.namespace]
-   [:b #bind result.name " "]
-   [:i.args #bind subresult.args]
-   [:div.description
-    (ng-if subresult.special_type
-        [:i #bind subresult.special_type " "])
-    #bind subresult.doc]
-   (ng-if subresult.url
-       [:i.url
-        "See "
-        [:a {:href #bind subresult.url}
-         #bind subresult.url]])])
+  [:div
+   [:div.doc
+    [:i.right #bind subresult.namespace]
+    [:b #bind result.name " "]
+    [:i.args #bind subresult.args]
+    [:div.description
+     (ng-if subresult.special_type
+            [:i #bind subresult.special_type " "])
+     #bind subresult.doc]
+    (ng-if subresult.url
+           [:i.url
+            "See "
+            [:a {:href #bind subresult.url}
+             #bind subresult.url]])]
+   [:div.right
+    [:a.fn-source {:href "http://clojuredocs.org/{{subresult.namespace}}/{{result.name}}#examples"}
+     "examples"]
+    " "
+    [:a.fn-source {:href "#"
+                   :ng-mouseover "subresult.src || fetchSource(result, subresult)"
+                   :tooltip-html-unsafe (html [:pre #bind "subresult.src || ''"])
+                   :tooltip-placement "left"}
+     "source"]]
+   [:hr]])
 
 (defn header
   "Helper method to build the page's header."
