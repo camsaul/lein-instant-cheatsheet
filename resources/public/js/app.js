@@ -33,7 +33,6 @@ App.controller('MainController', ['$scope', '$location', '$sce', 'API', function
 
     $scope.onTextChange = function() {
         $location.search('q', $scope.textInput);
-        console.log("API CALL: " + $scope.textInput);
         API.matches({
             q: $scope.textInput
         }, function(results) {
