@@ -72,3 +72,6 @@ App.controller('MainController', ['$scope', '$location', '$sce', 'API', function
 
     $scope.onTextChange();
 }]);
+
+// focus on the text input after everything is all loaded up
+document.getElementById('filter').focus();
