@@ -13,18 +13,13 @@ Instant Clojure Cheatsheet has a built-in filter bar at the top to search for ma
 
 
 #### Easy Customization ####
-Instant Clojure Cheatsheet is built in Clojure. You can easily add any libraries you want to your cheatsheet. By default, I've added almost all of the Clojure core and contrib libraries, but it's really easy to choose your own -- just add the dependencies in `project.clj` and add `use` or `require` statements in `handler.clj`. That's it. Run `lein ring server` from the project's root directory and you have your own Instant Clojure Cheatsheet. You can use it to make cheatsheets for `core.logic` or even your own projects. You can save your cheatsheets for later use with
+Instant Clojure Cheatsheet is built in Clojure. You can easily add any libraries you want to your cheatsheet. By default, I've added almost all of the Clojure core and contrib libraries, but it's really easy to choose your own -- just add the dependencies in `project.clj` and add `use` or `require` statements in `handler.clj`. That's it. Run `lein ring server` from the project's root directory and you have your own Instant Clojure Cheatsheet. You can use it to make cheatsheets for `core.logic` or even your own projects.
 
-	wget -R localhost:3000
-
-or something similar like `curl` -- Instant Clojure Cheatsheet works fine as a static page.
-
-
-Instant Clojure Cheatsheet uses [Hiccup][3], [Twitter Bootstrap][4], and [jQuery][6], so it should be pretty easy to tweak as needed.
+Instant Clojure Cheatsheet uses [Hiccup][3], [Twitter Bootstrap][4], and [AngularJS][6], so it should be pretty easy to tweak as needed.
 
 
 #### Filtering Based on GET Params ####
-Last but not least, Instant Clojure Cheatsheet will automatically use a GET parameter passed to it as an initial value for the filter bar. That means a request like  [http://cammsaul.github.io/instant-clojure-cheatsheet/?print][5] will automatically search for symbols containing `print`. 
+Last but not least, Instant Clojure Cheatsheet will automatically use the GET parameter `q` as an initial value for the filter bar. That means a request like  [http://cammsaul.github.io/instant-clojure-cheatsheet/?print][5] will automatically search for symbols containing `print`.
 
 You can create an Emacs function to search Instant Clojure Cheatsheet, and even bind it to a keyboard shortcut:
 ```Lisp
@@ -54,5 +49,5 @@ You can try my instant cheatsheet [here][2].
 [3]: https://github.com/weavejester/hiccup
 [4]: http://twitter.github.io/bootstrap/
 [5]: http://cammsaul.github.io/instant-clojure-cheatsheet/?print
-[6]: http://jquery.com/
+[6]: https://angularjs.org
 [7]: https://github.com/weavejester/codox
