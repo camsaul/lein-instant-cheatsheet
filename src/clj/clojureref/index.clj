@@ -16,20 +16,11 @@
 
 ;;; HELPER FNS + MACROS
 
-(defmacro ng-repeat [varname coll & body]
+(defmacro ng-repeat
+  "Convenience that wraps BODY in an element like <div ng-repeat='VARNAME in COLL'> ... </div>"
+  [varname coll & body]
   `[:div {:ng-repeat ~(str varname " in " coll)}
     ~@body])
-
-(defmacro ng-if
-  ([condition elem]
-   (let [[type & elem] elem
-         [attrs & body] (if (map? (first elem)) elem
-                            (concat [nil] elem))
-         attrs (-> (or attrs {})
-                   (assoc :ng-if (str condition)))]
-     `[~type ~attrs ~@body]))
-  ([[condition element]]
-   `(ng-if ~condition ~element)))
 
 (defn binder
   "Used by the #bind reader macro:
@@ -107,14 +98,13 @@
     [:b #bind result.name " "]
     [:i.args #bind subresult.args]
     [:div.description
-     (ng-if subresult.special_type
-            [:i #bind subresult.special_type " "])
+     [:i {:ng-if "subresult.special_type"}
+      #bind subresult.special_type " "]
      #bind subresult.doc]
-    (ng-if subresult.url
-           [:i.url
-            "See "
-            [:a {:href #bind subresult.url}
-             #bind subresult.url]])]
+    [:i.url {:ng-if "subresult.url"}
+     "See "
+     [:a {:href #bind subresult.url}
+      #bind subresult.url]]]
    [:div.right
     [:a.fn-source {:href "http://clojuredocs.org/{{subresult.namespace}}/{{result.name}}#examples"}
      "examples"]
