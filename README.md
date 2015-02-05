@@ -13,7 +13,7 @@ Instant Clojure Cheatsheet has a built-in filter bar at the top to search for ma
 
 
 #### Easy Customization ####
-Instant Clojure Cheatsheet is built in Clojure. You can easily add any libraries you want to your cheatsheet. By default, I've added almost all of the Clojure core and contrib libraries, but it's really easy to choose your own -- just add the dependencies in `project.clj` and add `use` or `require` statements in `handler.clj`. That's it. Run `lein ring server` from the project's root directory and you have your own Instant Clojure Cheatsheet. You can use it to make cheatsheets for `core.logic` or even your own projects.
+Instant Clojure Cheatsheet is built in Clojure. You can easily add any libraries you want to your cheatsheet. By default, I've added almost all of the Clojure core and contrib libraries, but it's really easy to choose your own -- just add the dependencies in `project.clj` and add `use` or `require` statements in `sources.clj`. That's it. Run `lein ring server` from the project's root directory and you have your own Instant Clojure Cheatsheet. You can use it to make cheatsheets for `core.logic` or even your own projects.
 
 Instant Clojure Cheatsheet uses [Hiccup][3], [Twitter Bootstrap][4], and [AngularJS][6], so it should be pretty easy to tweak as needed.
 
