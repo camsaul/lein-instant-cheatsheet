@@ -111,7 +111,7 @@
     " "
     [:a.fn-source {:href "#"
                    :ng-mouseover "subresult.src || fetchSource(result, subresult)"
-                   :tooltip-html-unsafe (html [:pre #bind "subresult.src || ''"])
+                   :tooltip-html-unsafe (html [:pre.source-tooltip #bind "subresult.src || ''"])
                    :tooltip-placement "left"}
      "source"]]
    [:hr]])

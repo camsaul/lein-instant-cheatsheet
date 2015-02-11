@@ -1,5 +1,5 @@
 .tooltip {
-    font-size: 14px;
+    font-size: 13px;
     width: 800px;
 }
 .tooltip.in {
@@ -15,8 +15,8 @@
     line-height: 15px;
     padding: 12px 12px;
     text-align: left;
-    width: 600px;
-    max-width: 600px;
+    width: 800px;
+    max-width: 800px;
     font-family: Consolas, monaco, monospace;
     font-size: 13px;
     -webkit-border-radius: 6px;
@@ -24,9 +24,14 @@
     border-radius: 6px;
 }
 
+/* The <pre> element inside the tooltip */
+pre.source-tooltip {
+    font-size: 12px;
+}
+
 div.namespace {
     display: block;
-    font-size: 12px;
+    font-size: 13px;
     margin-bottom: 15px;
     line-height: 15px;
 }
@@ -49,7 +54,7 @@ div.doc b {
 }
 
 div.doc i {
-    font-size: 12px;
+    font-size: 13px;
     color: #aaaaaa;
 }
 
