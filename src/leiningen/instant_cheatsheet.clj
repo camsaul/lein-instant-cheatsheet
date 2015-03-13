@@ -11,7 +11,9 @@
      (-> project
          (update-in [:dependencies] conj ['instant-cheatsheet "1.0"]))
      `(do (require '~main-class)
-          (require 'clojureref.handler
+          (require 'clojure.java.browse
+                   'clojureref.handler
                    'clojureref.sources)
           (clojureref.sources/set-namespaces! (all-ns))
-          (clojureref.handler/start-jetty)))))
+          (clojureref.handler/start-jetty)
+          (clojure.java.browse/browse-url "http://localhost:13370")))))

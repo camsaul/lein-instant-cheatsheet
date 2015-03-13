@@ -21,4 +21,5 @@
       wrap-gzip))
 
 (defn start-jetty []
-  (jetty/run-jetty app {:port 1500}))
+  (jetty/run-jetty app {:port 13370
+                        :join? false}))

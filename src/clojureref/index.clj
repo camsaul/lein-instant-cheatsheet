@@ -56,7 +56,7 @@
   [:body
    [:div.container {:ng-controller "MainController"}
     (header page-name)
-    [:input#filter.span10 {:type "text"
+    [:input#filter.span12 {:type "text"
                            :placeholder "filter"
                            :ng-model "textInput"
                            :ng-change "onTextChange()"}]
@@ -70,7 +70,7 @@
 (defn left-column
   "Template for the HTML that lays out the left column."
   []
-  [:div#left.span4
+  [:div#left.span2
    (ng-repeat result results
      [:div.namespace
       [:a {:href (str "#?q=" (bind result.name))
@@ -81,7 +81,7 @@
 (defn right-column
   "Template for HTML that lays out the right-column."
   []
-  [:div#source.span6
+  [:div#source.span10
    (ng-repeat result results
      (ng-repeat subresult result.matches
        (right-column-symbol-div)))])
@@ -97,9 +97,7 @@
     [:div.description
      [:i {:ng-if "subresult.special_type"}
       (bind subresult.special_type) " "]
-     (bind subresult.doc)
-     ;; (bind "markdown.toHTML(subresult.doc)")
-     ]
+     [:div {:markdown "subresult.doc"}]]
     [:i.url {:ng-if "subresult.url"}
      "See "
      [:a {:href (bind subresult.url)}
@@ -119,7 +117,7 @@
   "Helper method to build the page's header."
   [title]
   [:div.row
-   [:span.span9
+   [:span.span12
     [:div.navbar
      [:div.navbar-inner
       [:div.container
@@ -142,6 +140,6 @@
                   "//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-resource.min.js"
                   "//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.min.js"
                   "//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"
-                  ;; "//cdnjs.cloudflare.com/ajax/libs/markdown.js/0.6.0-beta1/markdown.min.js"
+                  "//cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"
                   "js/bootstrap-tooltip.min.js"
                   "js/app.js"])

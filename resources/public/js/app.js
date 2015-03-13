@@ -73,5 +73,21 @@ App.controller('MainController', ['$scope', '$location', '$sce', 'API', function
     $scope.onTextChange();
 }]);
 
+App.directive("markdown", function() {
+    var converter = new Showdown.converter();
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var renderMarkdown = function() {
+                console.log("TEXT -> ", scope.$eval(attrs.markdown));
+                var htmlText = converter.makeHtml(scope.$eval(attrs.markdown) || '');
+                element.html(htmlText);
+            };
+            scope.$watch(attrs.markdown, renderMarkdown);
+            renderMarkdown();
+        }
+    }
+});
+
 // focus on the text input after everything is all loaded up
 document.getElementById('filter').focus();
