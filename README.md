@@ -54,7 +54,7 @@ Hitting `<f12> i` will prompt you for a search term and open a new browser tab w
 
 Instant Cheatsheet is inspired by other excellent Clojure cheatsheets like [this one][1].
 
-Instant Cheatsheet was built with [Hiccup][3], [Twitter Bootstrap][4], and [AngularJS][6], so it should be pretty easy to tweak as needed.
+Instant Cheatsheet was built with [Hiccup][3], [Bootstrap][4], and [AngularJS][6].
 
 [1]: http://jafingerhut.github.io/cheatsheet/clojuredocs/cheatsheet-tiptip-no-cdocs-summary.html
 [2]: https://github.com/cammsaul/instant-clojure-cheatsheet
