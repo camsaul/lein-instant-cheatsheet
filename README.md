@@ -1,5 +1,9 @@
-Instant Clojure Cheatsheet
+lein-instant-cheatsheet
 ==========================
+
+[![Clojars Project](http://clojars.org/lein-instant-cheatsheet/latest-version.svg)](http://clojars.org/lein-instant-cheatsheet)
+
+[![Dependencies Status](http://jarkeeper.com/cammsaul/instant-clojure-cheatsheet/status.png)](http://jarkeeper.com/cammsaul/instant-clojure-cheatsheet)
 
 [Instant Clojure Cheatsheet][2] is a customizable reference for Clojure with built-in filtering. It's inspired by other excellent Clojure cheatsheets like [this one][1].
 
