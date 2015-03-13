@@ -5,7 +5,7 @@ lein-instant-cheatsheet
 
 [![Dependencies Status](http://jarkeeper.com/cammsaul/instant-clojure-cheatsheet/status.png)](http://jarkeeper.com/cammsaul/instant-clojure-cheatsheet)
 
-[Instant Cheatsheet][2] instantly creates a cheatsheet for your project and included dependecies.
+[Instant Cheatsheet][2] instantly creates a cheatsheet for your project and its dependecies.
 
 1.  Add `lein-instant-cheatsheet` to your Leiningen `:plugins`
 2.  Start the webserver with `lein instant-cheatsheet`
