@@ -6,6 +6,7 @@
 /static
 pom.xml
 pom.xml/asc
+pom.xml.asc
 *.jar
 *.class
 .lein-deps-sum
