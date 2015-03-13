@@ -1,6 +1,8 @@
 (defproject lein-instant-cheatsheet "2.0.0"
-  :description "Cam Saul's Instant Clojure Cheatsheet"
-  :url "http://example.com/FIXME"
+  :description "Leiningen plugin to create a cheatsheet for your Clojure project <3"
+  :url "https://github.com/cammsaul/instant-clojure-cheatsheet"
+  :license {:name "The MIT License"
+            :url "http://opensource.org/licenses/MIT"}
   :min-lein-version "2.0.0"
   :eval-in-leiningen true
   :dependencies [[org.clojure/tools.namespace "0.2.10"]
