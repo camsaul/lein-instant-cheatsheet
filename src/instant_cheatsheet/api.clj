@@ -1,9 +1,9 @@
-(ns clojureref.api
-  "API endpoints that return some subset of the data defined in `clojureref.sources`."
+(ns instant-cheatsheet.api
+  "API endpoints that return some subset of the data defined in `instant-cheatsheet.sources`."
   (:require [cheshire.core :as cheshire]
             [compojure.core :refer [defroutes GET]]
-            (clojureref [sources :as sources]
-                        [util :as util])))
+            (instant-cheatsheet [sources :as sources]
+                                [util :as util])))
 
 
 (defmacro def-api-fn

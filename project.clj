@@ -1,4 +1,4 @@
-(defproject instant-cheatsheet "1.0"
+(defproject lein-instant-cheatsheet "2.0.0"
   :description "Cam Saul's Instant Clojure Cheatsheet"
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"

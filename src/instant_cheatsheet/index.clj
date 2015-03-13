@@ -1,4 +1,4 @@
-(ns clojureref.index
+(ns instant-cheatsheet.index
   "The Hiccup templates that define index.html"
   (:require (hiccup [core :refer [html]]
                     [page :refer [html5 include-css include-js]])))

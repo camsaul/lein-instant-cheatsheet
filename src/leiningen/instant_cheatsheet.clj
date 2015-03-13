@@ -9,11 +9,11 @@
                           (map #(java.io.File. ^String %)))]
     (lein/eval-in-project
      (-> project
-         (update-in [:dependencies] conj ['instant-cheatsheet "1.0"]))
+         (update-in [:dependencies] conj ['lein-instant-cheatsheet "2.0.0"]))
      `(do (require '~main-class)
           (require 'clojure.java.browse
-                   'clojureref.handler
-                   'clojureref.sources)
-          (clojureref.sources/set-namespaces! (all-ns))
-          (clojureref.handler/start-jetty)
+                   'instant-cheatsheet.handler
+                   'instant-cheatsheet.sources)
+          (instant-cheatsheet.sources/set-namespaces! (all-ns))
+          (instant-cheatsheet.handler/start-jetty)
           (clojure.java.browse/browse-url "http://localhost:13370")))))

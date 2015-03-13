@@ -1,4 +1,4 @@
-(ns clojureref.util
+(ns instant-cheatsheet.util
   "Helper methods to get dox/source for symbols, and calculate string distance."
   (:require clojure.repl))
 

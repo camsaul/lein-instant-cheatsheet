@@ -1,7 +1,7 @@
-(ns clojureref.sources
+(ns instant-cheatsheet.sources
   "Static data relating to namespaces and symbols."
   (:require [clojure.string :as str]
-            [clojureref.util :as util]))
+            [instant-cheatsheet.util :as util]))
 
 (def ^:private namespaces (atom []))
 
