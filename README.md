@@ -56,7 +56,7 @@ Instant Cheatsheet is inspired by other excellent Clojure cheatsheets like [this
 
 Instant Cheatsheet was built with [Hiccup][3], [Twitter Bootstrap][4], and [AngularJS][6], so it should be pretty easy to tweak as needed.
 
-[1]: http://jafingerhut.github.io/cheatsheet-clj-1.3/cheatsheet-tiptip-no-cdocs-summary.html
+[1]: http://jafingerhut.github.io/cheatsheet/clojuredocs/cheatsheet-tiptip-no-cdocs-summary.html
 [2]: https://github.com/cammsaul/instant-clojure-cheatsheet
 [3]: https://github.com/weavejester/hiccup
 [4]: http://twitter.github.io/bootstrap/
