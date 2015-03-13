@@ -27,6 +27,11 @@ You can also search for examples from [ClojureDocs][8] by clicking the `examples
 Instant Cheatsheet will automatically use the GET parameter `q` as an initial value for the filter bar.
 That means a request like `http://localhost:13370/#?q=print` will automatically search for symbols containing `print`.
 
+
+#### Markdown Support ####
+
+Like [Marginalia][5], Instant Cheatsheet parses docstrs as Markdown. Add examples, links, and more to your documentation!
+
 #### Emacs Keybinding ####
 
 You can create an Emacs function to search Instant Cheatsheet, and even bind it to a keyboard shortcut:
@@ -55,5 +60,6 @@ Instant Cheatsheet was built with [Hiccup][3], [Twitter Bootstrap][4], and [Angu
 [2]: https://github.com/cammsaul/instant-clojure-cheatsheet
 [3]: https://github.com/weavejester/hiccup
 [4]: http://twitter.github.io/bootstrap/
+[5]: http://fogus.github.io/marginalia/
 [6]: https://angularjs.org
 [8]: http://clojuredocs.org/
