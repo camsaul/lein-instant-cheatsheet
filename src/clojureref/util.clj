@@ -1,8 +1,6 @@
 (ns clojureref.util
   "Helper methods to get dox/source for symbols, and calculate string distance."
-  (:use [hiccup.core :only (html)])
-  (:require clojure.repl
-            [clojure.string :as str]))
+  (:require clojure.repl))
 
 (def source-for-symbol
   "Gets source from function/macro/special form var."

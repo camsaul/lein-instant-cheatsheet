@@ -1,7 +1,7 @@
 (ns clojureref.index
   "The Hiccup templates that define index.html"
-  (:use [hiccup.page :only (html5 include-css include-js)]
-        [hiccup.core :only (html)]))
+  (:require (hiccup [core :refer [html]]
+                    [page :refer [html5 include-css include-js]])))
 
 (declare head
          body
@@ -22,11 +22,8 @@
   `[:div {:ng-repeat ~(str varname " in " coll)}
     ~@body])
 
-(defn binder
-  "Used by the #bind reader macro:
-   `#bind result.name ->> '{{result.name}}'"
-  [symb]
-  (str "{{" (name symb) "}}"))
+(defmacro bind [symb]
+  (format "{{%s}}" (name symb)))
 
 
 ;;; INDEX.HTML TEMPLATES
@@ -76,10 +73,10 @@
   [:div#left.span4
    (ng-repeat result results
      [:div.namespace
-      [:a {:href (str "#?q=" #bind result.name)
+      [:a {:href (str "#?q=" (bind result.name))
            :tooltip-placement "right"
-           :tooltip-html-unsafe (html [:div #bind "leftTooltip(result)"])}
-       #bind result.name]])])
+           :tooltip-html-unsafe (html [:div (bind "leftTooltip(result)")])}
+       (bind result.name)]])])
 
 (defn right-column
   "Template for HTML that lays out the right-column."
@@ -94,24 +91,26 @@
   []
   [:div
    [:div.doc
-    [:i.right #bind subresult.namespace]
-    [:b #bind result.name " "]
-    [:i.args #bind subresult.args]
+    [:i.right (bind subresult.namespace)]
+    [:b (bind result.name) " "]
+    [:i.args (bind subresult.args)]
     [:div.description
      [:i {:ng-if "subresult.special_type"}
-      #bind subresult.special_type " "]
-     #bind subresult.doc]
+      (bind subresult.special_type) " "]
+     (bind subresult.doc)
+     ;; (bind "markdown.toHTML(subresult.doc)")
+     ]
     [:i.url {:ng-if "subresult.url"}
      "See "
-     [:a {:href #bind subresult.url}
-      #bind subresult.url]]]
+     [:a {:href (bind subresult.url)}
+      (bind subresult.url)]]]
    [:div.right
     [:a.fn-source {:href "http://clojuredocs.org/{{subresult.namespace}}/{{result.name}}#examples"}
      "examples"]
     " "
     [:a.fn-source {:href "#"
                    :ng-mouseover "subresult.src || fetchSource(result, subresult)"
-                   :tooltip-html-unsafe (html [:pre.source-tooltip #bind "subresult.src || ''"])
+                   :tooltip-html-unsafe (html [:pre.source-tooltip (bind "subresult.src || ''")])
                    :tooltip-placement "left"}
      "source"]]
    [:hr]])
@@ -143,5 +142,6 @@
                   "//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-resource.min.js"
                   "//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.min.js"
                   "//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"
+                  ;; "//cdnjs.cloudflare.com/ajax/libs/markdown.js/0.6.0-beta1/markdown.min.js"
                   "js/bootstrap-tooltip.min.js"
                   "js/app.js"])

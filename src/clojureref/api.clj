@@ -1,9 +1,9 @@
 (ns clojureref.api
   "API endpoints that return some subset of the data defined in `clojureref.sources`."
-  (:use [compojure.core :only (defroutes GET)])
-  (:require [clojure.data.json :as json]
-            [clojureref.sources :as sources]
-            [clojureref.util :as util]))
+  (:require [cheshire.core :as cheshire]
+            [compojure.core :refer [defroutes GET]]
+            (clojureref [sources :as sources]
+                        [util :as util])))
 
 
 (defmacro def-api-fn
@@ -12,19 +12,18 @@
   `(defn ~name ~docstr ~args-form
      {:status 200
       :headers {"Content-Type" "application/json"}
-      :body (clojure.data.json/write-str
-             (do ~@body))}))
+      :body (cheshire/generate-string (do ~@body))}))
 
 (def-api-fn get-matches
   "Return vector of [{:name symbol-name :matches [infodict+]}+] of symbols that match Q."
   [q]
   (->> (filter (fn [symbol-str] (.contains symbol-str q))
-               sources/all-symbols-keys)
+               @sources/all-symbols-keys)
        (take 50) ; reasonable limit <3
        (sort-by (partial util/levenshtein-distance q))
        (map (fn [match]
               {:name match
-               :matches (sources/all-symbols match)}))))
+               :matches (@sources/all-symbols match)}))))
 
 (def-api-fn get-source
   "Return the source code for symbol in specified namespace."
