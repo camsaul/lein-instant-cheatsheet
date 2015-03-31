@@ -10,7 +10,7 @@ lein-instant-cheatsheet
 1.  Add `lein-instant-cheatsheet` to your Leiningen `:plugins`
 2.  Start the webserver with `lein instant-cheatsheet`
 
-Instant Cheatsheet spins up a Ring server at `localhost:13370`.
+Instant Cheatsheet spins up a Ring server at `localhost:13370` and automatically reloads documentation whenever a Clojure file in your project changes.
 
 [![Screenshot](screenshot.png)][2]
 
