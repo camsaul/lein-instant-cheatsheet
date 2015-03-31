@@ -1,6 +1,7 @@
 (ns instant-cheatsheet.api
   "API endpoints that return some subset of the data defined in `instant-cheatsheet.sources`."
-  (:require [cheshire.core :as cheshire]
+  (:require clojure.repl
+            [cheshire.core :as cheshire]
             [compojure.core :refer [defroutes GET]]
             (instant-cheatsheet [sources :as sources]
                                 [util :as util])))
@@ -17,9 +18,9 @@
 (def-api-fn get-matches
   "Return vector of [{:name symbol-name :matches [infodict+]}+] of symbols that match Q."
   [q]
-  (->> (filter (fn [symbol-str] (.contains symbol-str q))
+  (->> (filter (fn [^String symbol-str] (.contains symbol-str q))
                @sources/all-symbols-keys)
-       (take 50) ; reasonable limit <3
+       (take 100) ; reasonable limit <3
        (sort-by (partial util/levenshtein-distance q))
        (map (fn [match]
               {:name match
@@ -29,7 +30,7 @@
   "Return the source code for symbol in specified namespace."
   [ns-name-str symb-name]
   (let [qualified-symbol (symbol ns-name-str symb-name)]
-    {:source (util/source-for-symbol qualified-symbol)}))
+    {:source (clojure.repl/source-fn qualified-symbol)}))
 
 (defroutes routes
   (GET "/matches" [q] (get-matches q))

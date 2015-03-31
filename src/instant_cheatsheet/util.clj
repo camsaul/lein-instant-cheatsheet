@@ -1,12 +1,6 @@
 (ns instant-cheatsheet.util
-  "Helper methods to get dox/source for symbols, and calculate string distance."
-  (:require clojure.repl))
+  "Helper methods to get dox/source for symbols, and calculate string distance.")
 
-(def source-for-symbol
-  "Gets source from function/macro/special form var."
-  (memoize
-   (fn [symb]
-     (clojure.repl/source-fn symb))))
 
 (defn doc-for-symbol
   "Get documentation (description, args, special type, etc.) from metadata for function/macro/special form."
