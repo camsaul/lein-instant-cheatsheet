@@ -50,6 +50,22 @@ You can create an Emacs function to search Instant Cheatsheet, and even bind it 
 Hitting `<f12> i` will prompt you for a search term and open a new browser tab with that term as the initial filter text.
 
 
+#### Changelog ####
+
+*  `2.1.1` (March 31st, 2015)
+   *  Fix overflowing left-hand symbols list
+   *  Add custom source reader that works in cases `clojure.repl/source-fn` does not
+   *  Strip docstrings from source
+*  `2.1.0` (March 30th, 2015)
+   *  Automatically reload documentation from files that have changed since last API call
+*  `2.0.0` (March 13th, 2015)
+   *  Rewrite [instant-cheatsheet](https://github.com/cammsaul/instant-clojure-cheatsheet) as a Leiningen plugin
+*  `1.5.0` (Feb 4th, 2015)
+   * Rework [Instant Clojure Cheatsheet](https://github.com/cammsaul/instant-clojure-cheatsheet) to use Angular instead of jQuery
+*  `1.0.0` (April 5th, 2013)
+   *  Initial release of standalone, static [Instant Clojure Cheatsheet](https://github.com/cammsaul/instant-clojure-cheatsheet)
+
+
 #### About ####
 
 Instant Cheatsheet is inspired by other excellent Clojure cheatsheets like [this one][1].

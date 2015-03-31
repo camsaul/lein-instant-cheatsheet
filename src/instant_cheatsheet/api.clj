@@ -1,6 +1,6 @@
 (ns instant-cheatsheet.api
   "API endpoints that return some subset of the data defined in `instant-cheatsheet.sources`."
-  (:require clojure.repl
+  (:require [clojure.string :as s]
             [cheshire.core :as cheshire]
             [compojure.core :refer [defroutes GET]]
             (instant-cheatsheet [sources :as sources]
@@ -29,8 +29,18 @@
 (def-api-fn get-source
   "Return the source code for symbol in specified namespace."
   [ns-name-str symb-name]
-  (let [qualified-symbol (symbol ns-name-str symb-name)]
-    {:source (clojure.repl/source-fn qualified-symbol)}))
+  (let [qualified-symbol (symbol ns-name-str symb-name)
+        docstr (:doc (meta (find-var qualified-symbol)))
+        source (util/read-source qualified-symbol)]
+    {:source (when source
+               (if-not docstr source                                   ; strip out docstr if one exists
+                       (let [docstr (->> (s/escape docstr {\" "\\\""}) ; \" in the docstr will look like \\"" in the source itself
+                                         (format "\"%s\""))]           ; docstr is surrounded by quotes in source
+                         (->> (s/replace source docstr "")
+                              s/split-lines
+                              (filter (complement s/blank?))           ; filter out any blank lines
+                              (interpose "\n")
+                              (apply str)))))}))
 
 (defroutes routes
   (GET "/matches" [q] (get-matches q))
