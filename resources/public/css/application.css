@@ -36,6 +36,10 @@ div.namespace {
     line-height: 15px;
 }
 
+#left {
+    overflow-x: scroll;
+}
+
 div#source {
     font-family: Consolas, monaco, monospace;
     font-size: 13px;
