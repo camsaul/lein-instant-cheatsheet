@@ -9,8 +9,8 @@
 
 (defmacro def-api-fn
   "Helper macro to create an API function that returns JSON"
-  [name docstr args-form & body]
-  `(defn ~name ~docstr ~args-form
+  [fn-name docstr args-form & body]
+  `(defn ~fn-name ~docstr ~args-form
      {:status 200
       :headers {"Content-Type" "application/json"}
       :body (cheshire/generate-string (do ~@body))}))

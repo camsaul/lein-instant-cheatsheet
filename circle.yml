@@ -1,0 +1,8 @@
+machine:
+  java:
+    version:
+      oraclejdk8
+test:
+  override:
+    - case $CIRCLE_NODE_INDEX in 0) lein eastwood ;; 1) lein check ;; 2) lein bikeshed --max-line-length 160 ;; esac: # TODO - unit tests <3
+        parallel: true

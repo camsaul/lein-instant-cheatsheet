@@ -11,4 +11,6 @@
                  [cheshire "5.4.0"]
                  [compojure "1.3.2"]
                  [hiccup "1.0.5"]
-                 [ring/ring-jetty-adapter "1.3.2"]])
+                 [ring/ring-jetty-adapter "1.3.2"]]
+  :profiles {:dev {:plugins [[jonase/eastwood "0.2.1"]
+                             [lein-bikeshed "0.2.0"]]}})

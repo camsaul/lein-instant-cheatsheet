@@ -17,10 +17,10 @@
 
 (defn symbols-for-ns
   "Return seq of symbols + info like [symb-name {info}] for NS."
-  [ns]
-  (let [ns-name-str (-> ns ns-name str)
+  [nmsp]
+  (let [ns-name-str (-> nmsp ns-name str)
         ns-info {:namespace ns-name-str}]
-    (->> ns
+    (->> nmsp
          ns-publics                     ; map of symbol -> var
          keys
          (map (fn [symb]
