@@ -12,7 +12,7 @@ lein-instant-cheatsheet
 
 Instant Cheatsheet spins up a Ring server at `localhost:13370` and automatically reloads documentation whenever a Clojure file in your project changes.
 
-[![Screenshot](screenshot.png)][2]
+[![Screenshot](screenshot.gif)][2]
 
 [Instant Cheatsheet][2] has a few features that might just make it your go-to Clojure reference:
 
