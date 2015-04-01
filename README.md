@@ -52,7 +52,7 @@ Hitting `<f12> i` will prompt you for a search term and open a new browser tab w
 
 #### Changelog ####
 
-*  `2.1.2` (Coming Soon)
+*  `2.1.3` (April 1st, 2015)
    *  Fix issue where [instant-cheatsheet](https://github.com/cammsaul/instant-clojure-cheatsheet) would fail to launch
       in projects that did not have a `:main` class defined
 *  `2.1.1` (March 31st, 2015)
