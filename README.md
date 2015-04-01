@@ -3,7 +3,7 @@ lein-instant-cheatsheet
 
 [![Clojars Project](http://clojars.org/lein-instant-cheatsheet/latest-version.svg)](http://clojars.org/lein-instant-cheatsheet)
 
-[![Dependencies Status](http://jarkeeper.com/cammsaul/instant-clojure-cheatsheet/status.png)](http://jarkeeper.com/cammsaul/instant-clojure-cheatsheet)
+[![Dependencies Status](http://jarkeeper.com/cammsaul/instant-clojure-cheatsheet/status.png)](http://jarkeeper.com/cammsaul/instant-clojure-cheatsheet) [![Circle CI](https://circleci.com/gh/cammsaul/instant-clojure-cheatsheet.svg?style=svg)](https://circleci.com/gh/cammsaul/instant-clojure-cheatsheet)
 
 [Instant Cheatsheet][2] instantly creates a cheatsheet for your project and its dependecies.
 
