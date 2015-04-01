@@ -14,8 +14,9 @@
         {:keys [forms arglists doc url macro special-form name]} metta
         args (or forms arglists)]
     {:doc doc
-     :special_type (if special-form "Special Form"
-                       (if macro "Macro"))
+     :special_type (cond special-form "Special Form"
+                         macro        "Macro"
+                         :else        nil)
      :args (when args
              (format "(%s)" (apply str (interpose " " args))))
      :url (when special-form
