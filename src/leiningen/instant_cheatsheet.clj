@@ -12,12 +12,10 @@
 (defn instant-cheatsheet
   "Start a cheatsheet server for this project + dependencies."
   [project & args]
-  (let [main-class (:main project)]
-    (lein/eval-in-project
-     (-> project
-         (update-in [:dependencies] conj ['lein-instant-cheatsheet (instant-cheatsheet-version project)]))
-     `(do (require '~main-class
-                   'clojure.java.browse
-                   'instant-cheatsheet.handler)
-          (instant-cheatsheet.handler/start-jetty!)
-          (clojure.java.browse/browse-url "http://localhost:13370")))))
+  (lein/eval-in-project
+   (-> project
+       (update-in [:dependencies] conj ['lein-instant-cheatsheet (instant-cheatsheet-version project)]))
+   `(do (require 'clojure.java.browse
+                 'instant-cheatsheet.handler)
+        (instant-cheatsheet.handler/start-jetty!)
+        (clojure.java.browse/browse-url "http://localhost:13370"))))
