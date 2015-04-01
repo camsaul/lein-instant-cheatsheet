@@ -47,7 +47,7 @@
   [handler]
   (fn [request]
     (future
-      (time (reload-files-if-needed))) ; reload files asynchronously so we don't slow down API calls
+      (reload-files-if-needed)) ; reload files asynchronously so we don't slow down API calls
     (handler request)))
 
 
