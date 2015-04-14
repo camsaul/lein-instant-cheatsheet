@@ -74,6 +74,7 @@
 
 (defn start-jetty! []
   (when-not @jetty-instance
+    (reload-files-if-needed)
     (future
       (reset! jetty-instance (jetty/run-jetty app {:port 13370
                                                    :join? false})))))
