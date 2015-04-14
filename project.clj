@@ -9,7 +9,7 @@
                  [org.clojure/tools.namespace "0.2.10"]
                  [amalloy/ring-gzip-middleware "0.1.3"]
                  [cheshire "5.4.0"]
-                 [compojure "1.3.2"]
+                 [compojure "1.3.3"]
                  [hiccup "1.0.5"]
                  [ring/ring-jetty-adapter "1.3.2"]]
   :profiles {:dev {:plugins [[jonase/eastwood "0.2.1"]
