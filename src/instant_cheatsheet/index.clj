@@ -133,13 +133,13 @@
     [:div.row
      [:h4 [:a {:href "http://github.com/cammsaul"} "© 2013 - 2015 Cam Saul"]]]]])
 
-(def css-includes ["css/bootstrap.min.css"
-                   "css/application.css"])
+(def css-includes ["cheatsheet/css/bootstrap.min.css"
+                   "cheatsheet/css/application.css"])
 
 (def js-includes ["//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"
                   "//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-resource.min.js"
                   "//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.min.js"
                   "//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"
                   "//cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"
-                  "js/bootstrap-tooltip.min.js"
-                  "js/app.js"])
+                  "cheatsheet/js/bootstrap-tooltip.min.js"
+                  "cheatsheet/js/app.js"])
