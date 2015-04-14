@@ -1,7 +1,7 @@
 lein-instant-cheatsheet
 ==========================
 
-[![Clojars Project](http://clojars.org/lein-instant-cheatsheet/latest-version.svg)](http://clojars.org/lein-instant-cheatsheet)
+[![Clojars Project](https://clojars.org/lein-instant-cheatsheet/latest-version.svg)](http://clojars.org/lein-instant-cheatsheet)
 
 [![Dependencies Status](http://jarkeeper.com/cammsaul/lein-instant-cheatsheet/status.png)](http://jarkeeper.com/cammsaul/lein-instant-cheatsheet) [![Circle CI](https://circleci.com/gh/cammsaul/lein-instant-cheatsheet.svg?style=svg)](https://circleci.com/gh/cammsaul/lein-instant-cheatsheet)
 
