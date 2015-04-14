@@ -1,4 +1,4 @@
-(defproject lein-instant-cheatsheet "2.1.3"
+(defproject lein-instant-cheatsheet "2.1.4"
   :description "Leiningen plugin to create a cheatsheet for your Clojure project <3"
   :url "https://github.com/cammsaul/instant-clojure-cheatsheet"
   :license {:name "The MIT License"

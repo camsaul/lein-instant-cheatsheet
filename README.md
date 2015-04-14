@@ -3,7 +3,7 @@ lein-instant-cheatsheet
 
 [![Clojars Project](http://clojars.org/lein-instant-cheatsheet/latest-version.svg)](http://clojars.org/lein-instant-cheatsheet)
 
-[![Dependencies Status](http://jarkeeper.com/cammsaul/instant-clojure-cheatsheet/status.png)](http://jarkeeper.com/cammsaul/instant-clojure-cheatsheet) [![Circle CI](https://circleci.com/gh/cammsaul/instant-clojure-cheatsheet.svg?style=svg)](https://circleci.com/gh/cammsaul/instant-clojure-cheatsheet)
+[![Dependencies Status](http://jarkeeper.com/cammsaul/lein-instant-cheatsheet/status.png)](http://jarkeeper.com/cammsaul/lein-instant-cheatsheet) [![Circle CI](https://circleci.com/gh/cammsaul/lein-instant-cheatsheet.svg?style=svg)](https://circleci.com/gh/cammsaul/lein-instant-cheatsheet)
 
 [Instant Cheatsheet][2] instantly creates a cheatsheet for your project and its dependecies.
 
@@ -52,8 +52,11 @@ Hitting `<f12> i` will prompt you for a search term and open a new browser tab w
 
 #### Changelog ####
 
+*  `2.1.4` (April 14th, 2015)
+   *  Fix issue where cheatsheet would appear empty on launch. ([#1](https://github.com/cammsaul/lein-instant-cheatsheet/issues/1))
+   *  Fix conflicts if target project had resources named `app.js`. ([#2](https://github.com/cammsaul/lein-instant-cheatsheet/issues/2))
 *  `2.1.3` (April 1st, 2015)
-   *  Fix issue where [instant-cheatsheet](https://github.com/cammsaul/instant-clojure-cheatsheet) would fail to launch
+   *  Fix issue where [instant-cheatsheet](https://github.com/cammsaul/lein-instant-cheatsheet) would fail to launch
       in projects that did not have a `:main` class defined
 *  `2.1.1` (March 31st, 2015)
    *  Fix overflowing left-hand symbols list
@@ -62,11 +65,11 @@ Hitting `<f12> i` will prompt you for a search term and open a new browser tab w
 *  `2.1.0` (March 30th, 2015)
    *  Automatically reload documentation from files that have changed since last API call
 *  `2.0.0` (March 13th, 2015)
-   *  Rewrite [instant-cheatsheet](https://github.com/cammsaul/instant-clojure-cheatsheet) as a Leiningen plugin
+   *  Rewrite [instant-cheatsheet](https://github.com/cammsaul/lein-instant-cheatsheet) as a Leiningen plugin
 *  `1.5.0` (Feb 4th, 2015)
-   * Rework [Instant Clojure Cheatsheet](https://github.com/cammsaul/instant-clojure-cheatsheet) to use Angular instead of jQuery
+   * Rework [Instant Clojure Cheatsheet](https://github.com/cammsaul/lein-instant-cheatsheet) to use Angular instead of jQuery
 *  `1.0.0` (April 5th, 2013)
-   *  Initial release of standalone, static [Instant Clojure Cheatsheet](https://github.com/cammsaul/instant-clojure-cheatsheet)
+   *  Initial release of standalone, static [Instant Clojure Cheatsheet](https://github.com/cammsaul/lein-instant-cheatsheet)
 
 
 #### About ####
@@ -76,7 +79,7 @@ Instant Cheatsheet is inspired by other excellent Clojure cheatsheets like [this
 Instant Cheatsheet was built with [Hiccup][3], [Bootstrap][4], and [AngularJS][6].
 
 [1]: http://jafingerhut.github.io/cheatsheet/clojuredocs/cheatsheet-tiptip-no-cdocs-summary.html
-[2]: https://github.com/cammsaul/instant-clojure-cheatsheet
+[2]: https://github.com/cammsaul/lein-instant-cheatsheet
 [3]: https://github.com/weavejester/hiccup
 [4]: http://twitter.github.io/bootstrap/
 [5]: http://fogus.github.io/marginalia/
