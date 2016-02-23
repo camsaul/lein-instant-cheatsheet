@@ -36,12 +36,17 @@ Like [Marginalia][5], Instant Cheatsheet parses docstrs as Markdown. Add example
 
 You can create an Emacs function to search Instant Cheatsheet, and even bind it to a keyboard shortcut:
 ```Lisp
+(defun string-remove-text-properties (string)
+  "Return a copy of STRING with all of its text properties removed."
+  (let ((s (copy-sequence string)))
+    (set-text-properties 0 (length s) nil s)
+    s))
+
 (defun instant-cheatsheet-search (search-term)
-  "Opens Instant Cheatsheet in a new browser tab and searches for SEARCH-TERM."
-  (interactive "sSearch Instant Cheatsheet for: ")
-  (browse-url
-   (concat "http://localhost:13370/#?q="
-           (url-hexify-string search-term))))
+  "Open a browser window and search Instant Clojure Cheatsheet for SEARCH-TERM."
+  (interactive (list (read-string "Search Instant Clojure Cheatsheet for: " (when (symbol-at-point)
+                                                                              (string-remove-text-properties (symbol-name (symbol-at-point)))))))
+  (browse-url (concat "http://localhost:13370/#?q=" (url-hexify-string search-term))))
 
 (define-key clojure-mode-map (kbd "<f12> i") #'instant-cheatsheet-search)
 (define-key cider-repl-mode-map (kbd "<f12> i") #'instant-cheatsheet-search)
