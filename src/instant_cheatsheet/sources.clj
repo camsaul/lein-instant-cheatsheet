@@ -5,49 +5,29 @@
 
 (def ^:private namespaces (atom []))
 
-(defn- dox-for-symbol
-  "Return dictionary of docstr, args, etc. for SYMB."
-  [ns-name-str symb-name]
-  (let [qualified-symbol (symbol ns-name-str symb-name)]
-    (util/doc-for-symbol qualified-symbol)))
-
-(defn- symbol-info [ns-info ns-name-str symb-name]
-  (merge ns-info
-         (dox-for-symbol ns-name-str symb-name)))
-
-(defn symbols-for-ns
-  "Return seq of symbols + info like [symb-name {info}] for NS."
-  [nmsp]
-  (let [ns-name-str (-> nmsp ns-name str)
-        ns-info {:namespace ns-name-str}]
-    (->> nmsp
-         ns-publics                     ; map of symbol -> var
-         keys
-         (map (fn [symb]
-                (let [symb-name (str symb)]
-                  [symb-name (symbol-info ns-info ns-name-str symb-name)]))))))
+(defn- ns->symbol-name+info
+  "Return seq of symbols + info like [symb-name {info}] for NMSPACE."
+  [nmspace]
+  (let [ns-name-str (str (ns-name nmspace))]
+    (for [[symb varr] (ns-publics nmspace)]
+      (let [symb-name (name symb)]
+        [symb-name (assoc (util/symbol->metadata (symbol ns-name-str symb-name))
+                          :namespace ns-name-str)]))))
 
 (def all-symbols
   "Dict of {symb-name -> [{info}+]}"
   (atom {}))
 
 (defn- reset-all-symbols! []
-  (reset! all-symbols (->> @namespaces
-                           (mapcat symbols-for-ns)
-                           (group-by first)
-                           (map (fn [[k valls]]
-                                  {k (map second valls)}))
-                           (into {}))))
+  (reset! all-symbols (into {} (for [[k valls] (group-by first (mapcat ns->symbol-name+info @namespaces))]
+                                 {k (map second valls)})) ))
 
 (def all-symbols-keys
   "Sorted vector of all string names of all symbols."
   (atom []))
 
 (defn- reset-all-symbols-keys! []
-  (reset! all-symbols-keys (->> @all-symbols
-                                keys
-                                sort
-                                vec)))
+  (reset! all-symbols-keys (vec (sort (keys @all-symbols)))))
 
 (defn set-namespaces! [ns-list]
   (reset! namespaces ns-list)
