@@ -56,7 +56,8 @@ Hitting `<f12> i` will prompt you for a search term and open a new browser tab w
 
 
 #### Changelog ####
-
+*  `2.1.5` (February 23rd, 2016)
+   *  Fix issue where some project symbols wouldn't appear in cheatsheet.
 *  `2.1.4` (April 14th, 2015)
    *  Fix issue where cheatsheet would appear empty on launch. ([#1](https://github.com/camsaul/lein-instant-cheatsheet/issues/1))
    *  Fix conflicts if target project had resources named `app.js`. ([#2](https://github.com/camsaul/lein-instant-cheatsheet/issues/2))
