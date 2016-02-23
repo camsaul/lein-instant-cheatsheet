@@ -13,4 +13,6 @@
                  [hiccup "1.0.5"]
                  [ring/ring-jetty-adapter "1.4.0"]]
   :profiles {:dev {:plugins [[jonase/eastwood "0.2.3"]
-                             [lein-bikeshed "0.3.0"]]}})
+                             [lein-bikeshed "0.3.0"]]
+                   :eastwood {:add-linters [:unused-private-vars]
+                              :exclude-linters [:unused-ret-vals]}}})
