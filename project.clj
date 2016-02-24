@@ -15,4 +15,5 @@
   :profiles {:dev {:plugins [[jonase/eastwood "0.2.3"]
                              [lein-bikeshed "0.3.0"]]
                    :eastwood {:add-linters [:unused-private-vars]
-                              :exclude-linters [:unused-ret-vals]}}})
+                              :exclude-linters [:unused-ret-vals]}}}
+   :deploy-repositories [["clojars" {:sign-releases false}]])
