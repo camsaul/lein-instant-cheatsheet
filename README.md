@@ -56,6 +56,8 @@ Hitting `<f12> i` will prompt you for a search term and open a new browser tab w
 
 
 #### Changelog ####
+*  `2.2.0` (Februrary 26th, 2016)
+   *  Added support for replacing GitHub-style named `:emoji:` with the equivalent characters via [https://github.com/iamcal/js-emoji](js-emoji).
 *  `2.1.5` (February 23rd, 2016)
    *  Fix issue where some project symbols wouldn't appear in cheatsheet.
 *  `2.1.4` (April 14th, 2015)

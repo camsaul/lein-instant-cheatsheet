@@ -3,45 +3,41 @@
   (:require (hiccup [core :refer [html]]
                     [page :refer [html5 include-css include-js]])))
 
-(declare head
-         body
-         header
-         footer
-         left-column
-         right-column
-         right-column-symbol-div
-         css-includes
-         js-includes)
+(def ^:private ^:const css-includes
+  ["cheatsheet/css/bootstrap.min.css"
+   "cheatsheet/css/application.css"
+   "cheatsheet/css/emoji.css"])
+
+(def ^:private ^:const js-includes
+  ["//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"
+   "//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-resource.min.js"
+   "//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.min.js"
+   "//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"
+   "//cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"
+   "cheatsheet/js/bootstrap-tooltip.min.js"
+   "cheatsheet/js/emoji.min.js"
+   "cheatsheet/js/app.js"])
 
 
 ;;; HELPER FNS + MACROS
 
-(defmacro ng-repeat
+(defmacro ^:private ng-repeat
   "Convenience that wraps BODY in an element like <div ng-repeat='VARNAME in COLL'> ... </div>"
   [varname coll & body]
   `[:div {:ng-repeat ~(str varname " in " coll)}
     ~@body])
 
-(defmacro bind [symb]
+(defmacro ^:private bind [symb]
   (format "{{%s}}" (name symb)))
 
 
 ;;; INDEX.HTML TEMPLATES
 
-(def page-name
+(def ^:private ^:const page-name
   "Name that should be used in title / header of the page."
   "Instant Clojure Cheatsheet")
 
-(def main-page
-  "Top-level template for index.html"
-  (memoize
-   (fn []
-     (html5 {:class "no-js"
-             :ng-app "cheatsheet"}
-            (head)
-            (body)))))
-
-(defn head
+(defn- head
   "Template for HTML <head> and contents."
   []
   [:head
@@ -50,24 +46,7 @@
    [:title page-name]
    (apply include-css css-includes)])
 
-(defn body
-  "Template for HTML <body> and contents."
-  []
-  [:body
-   [:div.container {:ng-controller "MainController"}
-    (header page-name)
-    [:input#filter.span12 {:type "text"
-                           :placeholder "filter"
-                           :ng-model "textInput"
-                           :ng-change "onTextChange()"}]
-    [:div.row
-     (left-column)
-     (right-column)]]
-   (footer)
-   ;; JS is placed at the end so the pages load oatfaster
-   (apply include-js js-includes)])
-
-(defn left-column
+(defn- left-column
   "Template for the HTML that lays out the left column."
   []
   [:div#left.span2
@@ -78,15 +57,7 @@
            :tooltip-html-unsafe (html [:div (bind "leftTooltip(result)")])}
        (bind result.name)]])])
 
-(defn right-column
-  "Template for HTML that lays out the right-column."
-  []
-  [:div#source.span10
-   (ng-repeat result results
-     (ng-repeat subresult result.matches
-       (right-column-symbol-div)))])
-
-(defn right-column-symbol-div
+(defn- right-column-symbol-div
   "The div template that is used to display symbol entries in the right column."
   []
   [:div
@@ -113,7 +84,15 @@
      "source"]]
    [:hr]])
 
-(defn header
+(defn- right-column
+  "Template for HTML that lays out the right-column."
+  []
+  [:div#source.span10
+   (ng-repeat result results
+     (ng-repeat subresult result.matches
+       (right-column-symbol-div)))])
+
+(defn- header
   "Helper method to build the page's header."
   [title]
   [:div.row
@@ -125,21 +104,36 @@
         [:ul.nav
          [:li [:a title]]]]]]]]])
 
-(defn footer
+(defn- footer
   "Helper method to build the page's footer."
   []
   [:footer
    [:div.container
     [:div.row
-     [:h4 [:a {:href "http://github.com/cammsaul"} "© 2013 - 2015 Cam Saul"]]]]])
+     [:h6 [:a {:href "http://github.com/camsaul"} "© 2013 - 2016 Cam Saül"]]]]])
 
-(def css-includes ["cheatsheet/css/bootstrap.min.css"
-                   "cheatsheet/css/application.css"])
+(defn- body
+  "Template for HTML <body> and contents."
+  []
+  [:body
+   [:div.container {:ng-controller "MainController"}
+    (header page-name)
+    [:input#filter.span12 {:type "text"
+                           :placeholder "filter"
+                           :ng-model "textInput"
+                           :ng-change "onTextChange()"}]
+    [:div.row
+     (left-column)
+     (right-column)]]
+   (footer)
+   ;; JS is placed at the end so the pages load oatfaster
+   (apply include-js js-includes)])
 
-(def js-includes ["//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"
-                  "//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-resource.min.js"
-                  "//ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.min.js"
-                  "//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"
-                  "//cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"
-                  "cheatsheet/js/bootstrap-tooltip.min.js"
-                  "cheatsheet/js/app.js"])
+(def main-page
+  "Top-level template for index.html"
+  (memoize
+   (fn []
+     (html5 {:class "no-js"
+             :ng-app "cheatsheet"}
+            (head)
+            (body)))))

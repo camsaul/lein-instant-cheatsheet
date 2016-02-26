@@ -1,4 +1,5 @@
 'use strict';
+/* global Showdown, emoji */
 
 var App = angular.module('cheatsheet', [
     'ngResource',
@@ -79,15 +80,25 @@ App.directive("markdown", function() {
         restrict: 'A',
         link: function(scope, element, attrs) {
             var renderMarkdown = function() {
-                console.log("TEXT -> ", scope.$eval(attrs.markdown));
-                var htmlText = converter.makeHtml(scope.$eval(attrs.markdown) || '');
+                var text = scope.$eval(attrs.markdown) || '';
+                var htmlText = converter.makeHtml(emoji.replace_colons(text));
                 element.html(htmlText);
             };
             scope.$watch(attrs.markdown, renderMarkdown);
             renderMarkdown();
         }
-    }
+    };
 });
+
+// initialize emoji
+emoji.img_path = 'https://raw.githubusercontent.com/github/gemoji/master/images/emoji/unicode/';
+emoji.sheet_path = 'cheatsheet/img/sheet_apple_64.png';
+emoji.init_env();
+emoji.text_mode = false;
+emoji.use_sheet = true;
+emoji.img_set = 'apple';
+emoji.img_sets.apple.path = emoji.img_path;
+emoji.img_sets.apple.sheet = emoji.sheet_path;
 
 // focus on the text input after everything is all loaded up
 document.getElementById('filter').focus();
