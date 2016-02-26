@@ -88,6 +88,6 @@ Instant Cheatsheet was built with [Hiccup][3], [Bootstrap][4], and [AngularJS][6
 [2]: https://github.com/camsaul/lein-instant-cheatsheet
 [3]: https://github.com/weavejester/hiccup
 [4]: http://twitter.github.io/bootstrap/
-[5]: http://fogus.github.io/marginalia/
+[5]: http://gdeer81.github.io/marginalia/
 [6]: https://angularjs.org
 [8]: http://clojuredocs.org/
