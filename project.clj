@@ -1,8 +1,8 @@
 (defproject lein-instant-cheatsheet "2.2.0"
   :description "Leiningen plugin to create a cheatsheet for your Clojure project <3"
   :url "https://github.com/camsaul/lein-instant-cheatsheet"
-  :license {:name "The MIT License"
-            :url "http://opensource.org/licenses/MIT"}
+  :license {:name "MIT"
+            :url "https://raw.githubusercontent.com/camsaul/lein-instant-cheatsheet/master/LICENSE.txt"}
   :min-lein-version "2.0.0"
   :eval-in-leiningen true
   :dependencies [[org.clojure/java.classpath "0.2.3"]
