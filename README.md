@@ -46,8 +46,9 @@ You can create an Emacs function to search Instant Cheatsheet, and even bind it 
 
 (defun instant-cheatsheet-search (search-term)
   "Open a browser window and search Instant Clojure Cheatsheet for SEARCH-TERM."
-  (interactive (list (read-string "Search Instant Clojure Cheatsheet for: " (when (symbol-at-point)
-                                                                              (string-remove-text-properties (symbol-name (symbol-at-point)))))))
+  (interactive (list (read-string "Search Instant Clojure Cheatsheet for: "
+                                  (when (symbol-at-point)
+                                    (string-remove-text-properties (symbol-name (symbol-at-point)))))))
   (browse-url (concat "http://localhost:13370/#?q=" (url-hexify-string search-term))))
 
 (define-key clojure-mode-map (kbd "<f12> i") #'instant-cheatsheet-search)
