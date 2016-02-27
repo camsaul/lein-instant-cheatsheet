@@ -38,17 +38,13 @@ Instant Cheatsheet also understands `:emoji:` names à la GitHub or Slack. Emoji
 
 You can create an Emacs function to search Instant Cheatsheet, and even bind it to a keyboard shortcut:
 ```Lisp
-(defun string-remove-text-properties (string)
-  "Return a copy of STRING with all of its text properties removed."
-  (let ((s (copy-sequence string)))
-    (prog1 s
-      (set-text-properties 0 (length s) nil s))))
-
 (defun instant-cheatsheet-search (search-term)
   "Open a browser window and search Instant Clojure Cheatsheet for SEARCH-TERM."
   (interactive (list (read-string "Search Instant Clojure Cheatsheet for: "
                                   (when (symbol-at-point)
-                                    (string-remove-text-properties (symbol-name (symbol-at-point)))))))
+                                    (let ((s (copy-sequence (symbol-name (symbol-at-point)))))
+                                      (set-text-properties 0 (length s) nil s)
+                                      s)))))
   (browse-url (concat "http://localhost:13370/#?q=" (url-hexify-string search-term))))
 
 (dolist (keymap (list clojure-mode-map cider-repl-mode-map))
