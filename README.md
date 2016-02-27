@@ -32,6 +32,8 @@ That means a request like `http://localhost:13370/#?q=print` will automatically 
 
 Like [Marginalia][5], Instant Cheatsheet parses docstrs as Markdown. Add examples, links, and more to your documentation!
 
+Instant Cheatsheet also understands `:emoji:` names à la GitHub or Slack. Emoji names like `:yum:` will automatically be replaced with emoji images like :yum:.
+
 #### Emacs Keybinding ####
 
 You can create an Emacs function to search Instant Cheatsheet, and even bind it to a keyboard shortcut:
