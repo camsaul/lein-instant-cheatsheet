@@ -41,8 +41,8 @@ You can create an Emacs function to search Instant Cheatsheet, and even bind it 
 (defun string-remove-text-properties (string)
   "Return a copy of STRING with all of its text properties removed."
   (let ((s (copy-sequence string)))
-    (set-text-properties 0 (length s) nil s)
-    s))
+    (prog1 s
+      (set-text-properties 0 (length s) nil s))))
 
 (defun instant-cheatsheet-search (search-term)
   "Open a browser window and search Instant Clojure Cheatsheet for SEARCH-TERM."
