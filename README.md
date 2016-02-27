@@ -51,8 +51,8 @@ You can create an Emacs function to search Instant Cheatsheet, and even bind it 
                                     (string-remove-text-properties (symbol-name (symbol-at-point)))))))
   (browse-url (concat "http://localhost:13370/#?q=" (url-hexify-string search-term))))
 
-(define-key clojure-mode-map (kbd "<f12> i") #'instant-cheatsheet-search)
-(define-key cider-repl-mode-map (kbd "<f12> i") #'instant-cheatsheet-search)
+(dolist (keymap (list clojure-mode-map cider-repl-mode-map))
+  (define-key keymap (kbd "<f12> i") #'instant-cheatsheet-search))
 ```
 
 Hitting `<f12> i` will prompt you for a search term and open a new browser tab with that term as the initial filter text.
