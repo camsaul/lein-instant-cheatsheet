@@ -3,7 +3,7 @@ lein-instant-cheatsheet
 
 [![Clojars Project](https://clojars.org/lein-instant-cheatsheet/latest-version.svg)](http://clojars.org/lein-instant-cheatsheet)
 
-[![Dependencies Status](http://jarkeeper.com/camsaul/lein-instant-cheatsheet/status.png)](http://jarkeeper.com/camsaul/lein-instant-cheatsheet) [![Circle CI](https://circleci.com/gh/camsaul/lein-instant-cheatsheet.svg?style=svg)](https://circleci.com/gh/camsaul/lein-instant-cheatsheet) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/camsaul/lein-instant-cheatsheet/master/LICENSE.txt)
+[![Dependencies Status](http://jarkeeper.com/camsaul/lein-instant-cheatsheet/status.svg)](http://jarkeeper.com/camsaul/lein-instant-cheatsheet) [![Circle CI](https://circleci.com/gh/camsaul/lein-instant-cheatsheet.svg?style=svg)](https://circleci.com/gh/camsaul/lein-instant-cheatsheet) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/camsaul/lein-instant-cheatsheet/master/LICENSE.txt)
 
 [Instant Cheatsheet][2] instantly creates a cheatsheet for your project and its dependecies.
 
