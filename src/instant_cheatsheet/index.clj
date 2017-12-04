@@ -110,7 +110,7 @@
   [:footer
    [:div.container
     [:div.row
-     [:h6 [:a {:href "http://github.com/camsaul"} "© 2013 - 2016 Cam Saül"]]]]])
+     [:h6 [:a {:href "http://github.com/camsaul"} "© 2013 - 2017 Cam Saul"]]]]])
 
 (defn- body
   "Template for HTML <body> and contents."
