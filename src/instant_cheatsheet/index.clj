@@ -1,7 +1,8 @@
 (ns instant-cheatsheet.index
   "The Hiccup templates that define index.html"
-  (:require (hiccup [core :refer [html]]
-                    [page :refer [html5 include-css include-js]])))
+  (:require [hiccup
+             [core :refer [html]]
+             [page :refer [html5 include-css include-js]]]))
 
 (def ^:private ^:const css-includes
   ["cheatsheet/css/bootstrap.min.css"

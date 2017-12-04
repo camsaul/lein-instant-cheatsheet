@@ -1,10 +1,11 @@
 (ns instant-cheatsheet.api
   "API endpoints that return some subset of the data defined in `instant-cheatsheet.sources`."
-  (:require [clojure.string :as s]
-            [cheshire.core :as cheshire]
+  (:require [cheshire.core :as cheshire]
+            [clojure.string :as s]
             [compojure.core :refer [defroutes GET]]
-            (instant-cheatsheet [sources :as sources]
-                                [util :as util])))
+            [instant-cheatsheet
+             [sources :as sources]
+             [util :as util]]))
 
 (defn- response [body]
   {:status  200

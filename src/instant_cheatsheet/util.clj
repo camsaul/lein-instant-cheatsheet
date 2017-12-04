@@ -2,7 +2,7 @@
   "Helper methods to get dox/source for symbols, and calculate string distance."
   (:require [clojure.java.io :as io]
             [clojure.repl :as repl])
-  (:import (java.io InputStreamReader LineNumberReader PushbackReader)))
+  (:import [java.io InputStreamReader LineNumberReader PushbackReader]))
 
 
 (defn symbol->metadata

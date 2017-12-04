@@ -1,17 +1,18 @@
 (ns instant-cheatsheet.handler
   "Primary Compjure/Ring entry point of the app"
   (:require [clojure.java.classpath :as classpath]
-            (clojure.tools.namespace [file :as ns-file]
-                                     ;; [find :as ns-find]
-                                     [repl :as repl])
-            (compojure [core :refer [context defroutes GET]]
-                       [route :as route])
+            [clojure.tools.namespace.file :as ns-file]
+            [compojure
+             [core :refer [context defroutes GET]]
+             [route :as route]]
+            [instant-cheatsheet
+             [api :as api]
+             [index :as index]
+             [sources :as sources]]
             [ring.adapter.jetty :as jetty]
-            (ring.middleware [gzip :refer [wrap-gzip]]
-                             [params :refer [wrap-params]])
-            (instant-cheatsheet [api :as api]
-                                [index :as index]
-                                [sources :as sources]))
+            [ring.middleware
+             [gzip :refer [wrap-gzip]]
+             [params :refer [wrap-params]]])
   (:import java.io.File))
 
 ;; ## SOURCE RELOADING MIDDLEWARE
