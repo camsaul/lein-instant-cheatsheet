@@ -1,6 +1,5 @@
 (ns leiningen.instant-cheatsheet
-  (:require [clojure.tools.namespace.find :as ns-find]
-            [leiningen.core.eval :as lein]))
+  (:require [leiningen.core.eval :as lein]))
 
 (defn- instant-cheatsheet-version [{:keys [plugins]}]
   {:post [(string? %)]}
@@ -15,7 +14,13 @@
   (lein/eval-in-project
    (-> project
        (update-in [:dependencies] conj ['lein-instant-cheatsheet (instant-cheatsheet-version project)]))
-   `(do (require 'clojure.java.browse
-                 'instant-cheatsheet.handler)
-        (instant-cheatsheet.handler/start-jetty!)
-        (clojure.java.browse/browse-url "http://localhost:13370"))))
+   `(do
+      ;; load the instant-cheatsheet namespaces
+      (require 'clojure.java.browse
+               'instant-cheatsheet.handler)
+      ;; start the web server
+      (instant-cheatsheet.handler/start-jetty!)
+      ;; set the atom that keeps track of directories to search for Clojure dependencies in
+      (reset! instant-cheatsheet.handler/source-directories ~(vec (:source-paths project)))
+      ;; ok, now open the instant cheatsheet in the browser :)
+      (clojure.java.browse/browse-url "http://localhost:13370"))))

@@ -76,7 +76,7 @@
       (bind subresult.url)]]]
    [:div.right
     [:a.fn-source {:href "http://clojuredocs.org/{{subresult.namespace}}/{{result.name}}#examples"}
-     "examples"]
+     "search ClojureDocs for examples"]
     " "
     [:a.fn-source {:href "#"
                    :ng-mouseover "subresult.src || fetchSource(result, subresult)"
@@ -127,7 +127,7 @@
      (left-column)
      (right-column)]]
    (footer)
-   ;; JS is placed at the end so the pages load oatfaster
+   ;; JS is placed at the end so the pages load faster
    (apply include-js js-includes)])
 
 (def main-page

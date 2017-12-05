@@ -1,7 +1,6 @@
 (ns instant-cheatsheet.handler
   "Primary Compjure/Ring entry point of the app"
-  (:require [clojure.java.classpath :as classpath]
-            [clojure.tools.namespace.file :as ns-file]
+  (:require [clojure.tools.namespace.file :as ns-file]
             [compojure
              [core :refer [context defroutes GET]]
              [route :as route]]
@@ -17,53 +16,69 @@
 
 ;; ## SOURCE RELOADING MIDDLEWARE
 
-(def ^:private last-reload
+(def ^:private last-reload-started
+  "System time in milliseconds when the last reload was started."
   (atom 0))
 
-(def ^:private needs-reload
+(def ^:private files-have-been-reloaded
+  "Have any files been reloaded recently? If so, we need to update the namespaces presented in the UI by calling
+   `set-namespaces!`."
   (atom false))
+
 
 (declare reload-if-needed)
 
-(defn- reload-directory-if-needed [last-reload, ^File dir]
-  (doseq [file-or-dir (.listFiles dir)]
-    (reload-if-needed last-reload file-or-dir)))
+(def source-directories
+  "Sequence of directories (as strings) to look for source files in. Set on launch by looking at the `:source-paths`
+  property of the project."
+  (atom nil))
 
-(defn- reload-file-if-needed [last-reload, ^File file]
+(defn- reload-directory-if-needed [last-reload-started, ^File dir]
+  (doseq [file-or-dir (.listFiles dir)]
+    (reload-if-needed last-reload-started file-or-dir)))
+
+(defn- reload-file-if-needed [last-reload-started, ^File file]
   (when (and (ns-file/clojure-file? file)
-             (> (.lastModified file) last-reload))
+             (> (.lastModified file) last-reload-started))
+    (println "Reloading" (str file))
     (try
       (load-file (.getPath file))
-      (reset! needs-reload true)
+      (reset! files-have-been-reloaded true)
       (catch Exception e
         (println "Error loading file:" file e)))))
 
-(defn- reload-if-needed [last-reload, ^File file-or-dir]
+(defn- reload-if-needed [last-reload-started, ^File file-or-dir]
   (if (.isDirectory file-or-dir)
-    (reload-directory-if-needed last-reload file-or-dir)
-    (reload-file-if-needed      last-reload file-or-dir)))
+    (reload-directory-if-needed last-reload-started file-or-dir)
+    (reload-file-if-needed      last-reload-started file-or-dir)))
 
 (defn- reload-project-if-needed
   "Look for Clojure files that were modified since the last time this function was called;
    if any were found, reload them and call `sources/set-namespaces!`."
   []
-  (let [last-reload-timestamp @last-reload]
-    ;; reset `last-reload` before commencing so subsequent API calls
-    ;; in short succession don't reload a file more than once
-    (reset! last-reload (System/currentTimeMillis))
-    (doseq [dir (classpath/classpath-directories)]
-      (reload-directory-if-needed last-reload-timestamp dir))
-    (when @needs-reload
-      (reset! needs-reload false)
-      (println "Reloading documentation...")
-      (sources/set-namespaces! (vec (all-ns))))))
+  ;; This may end up getting called a few times before `source-directories` is populated. Wait until it is before
+  ;; trying to reload the project.
+  (when (seq @source-directories)
+    (let [last-reload-started-timestamp @last-reload-started]
+      ;; reset `last-reload-started` before commencing so subsequent API calls
+      ;; in short succession don't reload a file more than once
+      (reset! last-reload-started (System/currentTimeMillis))
+      (doseq [dir @source-directories]
+        (reload-directory-if-needed last-reload-started-timestamp (File. (str dir))))
+      (when @files-have-been-reloaded
+        (reset! files-have-been-reloaded false)
+        (println "Reloading documentation...")
+        (sources/set-namespaces! (vec (all-ns)))))))
 
 (defn- reload-if-needed-middleware
-  "Middleware that sees if any files in the classpath have been modified since the last call; if so, reloads
+  "Middleware that sees if any files in the source directories have been modified since the last call; if so, reloads
    namespaces and calls `sources/set-namespaces!`."
   [handler]
   (fn [request]
-    (future (reload-project-if-needed)) ; reload files asynchronously so we don't slow down API calls
+    ;; reload files asynchronously so we don't slow down API calls
+    (future (try (reload-project-if-needed)
+                 (catch Throwable e
+                   (println "Error reloading project:" e))))
     (handler request)))
 
 
