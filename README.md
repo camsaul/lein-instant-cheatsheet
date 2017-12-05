@@ -55,6 +55,8 @@ Hitting `<f12> i` will prompt you for a search term and open a new browser tab w
 
 
 #### Changelog ####
+*  `2.2.2` (December 4th, 2017)
+   *  Fix issues determining project source paths when using with Java 9.
 *  `2.2.1` (Februrary 26th, 2016)
    *  Slight tweaks to CSS for emoji.
 *  `2.2.0` (Februrary 26th, 2016)
