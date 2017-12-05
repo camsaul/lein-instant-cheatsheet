@@ -77,7 +77,7 @@
    [:div.right
     [:a.fn-source {:href "http://clojuredocs.org/{{subresult.namespace}}/{{result.name}}#examples"}
      "search ClojureDocs for examples"]
-    " "
+    " ∙ "
     [:a.fn-source {:href "#"
                    :ng-mouseover "subresult.src || fetchSource(result, subresult)"
                    :tooltip-html-unsafe (html [:pre.source-tooltip (bind "subresult.src || ''")])
